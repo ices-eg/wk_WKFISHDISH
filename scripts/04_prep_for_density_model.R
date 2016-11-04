@@ -4,21 +4,10 @@
 #
 # -------------------------------------
 
+# load packages etc.
+source("scripts/header.R")
 
 
-library(mgcv)
-library(gmrf)
-library(lattice)
-
-require(rgdal)
-require(rgeos)
-require(sp)
-require(spdep)
-require(raster)
-
-
-rm(list = ls())
-source("R/utilities.R")
 
 # read design table and look at species
 fulltab <- getControlTable()
@@ -28,6 +17,9 @@ species <- unique(fulltab$Species)
 area <- readOGR("shapefiles", "ICES_Areas_20160601_dense")
 statrec <- readOGR("shapefiles", "ICES_StatRec_mapto_ICES_Areas")
 statrec <- spTransform(statrec, crs(area)) # transdorm to wgs84
+
+
+# create intermediate data files: striped down spatial data etc.
 
 for (i in seq_along(species)) {
   cat("                                    \rWorking on species:", species[i], " (", i ,"/", length(species), ")"); flush.console()
@@ -54,6 +46,11 @@ for (i in seq_along(species)) {
   for (j in 1:nrow(stab)) {
 
     sdat <- dat[dat$Survey == stab$Survey.name[j] & dat$Quarter == stab$Quarter[j],]
+
+    if (nrow(sdat) == 0) {
+      warning("missing data for: ", species[i], " ", stab$Survey.name[j], " ", stab$Quarter[j])
+      next
+    }
 
     # keep only sampled areas
     tmp <- gContains(area, sdat, byid = TRUE)
@@ -83,7 +80,6 @@ for (i in seq_along(species)) {
 
     save(sarea, sstatrec, sdat, Q,
          file = paste0("species/", species[i], "/intermediate_data/", stab$Survey.name[j], "_", stab$Quarter[j],"_data.rData"))
-
   }
 }
 
