@@ -115,7 +115,7 @@ for (i in seq_along(species)) {
 
   # calculate total weight by haul and convert to CPUE
   # then merge onto hh
-  hl$weight <- hl$TotalNo * func(predict(lwr, newdata = hl, type = "response"))
+  hl$weight <- hl$HLNoAtLngt * func(predict(lwr, newdata = hl, type = "response"))
   hl$key <- apply(hl[keycols], 1, makekey)
   wt_tab <- tapply(hl$weight, hl$key, sum, na.rm=TRUE)
   # merge
