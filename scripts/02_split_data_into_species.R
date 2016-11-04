@@ -14,7 +14,7 @@ fulltab <- getControlTable()
 species <- unique(fulltab$Species)
 
 for (i in seq_along(species)) {
-  cat("                                    \rAggregating species:", species[i]); flush.console()
+  cat("\rAggregating species:", species[i], rep(" ", 50)); flush.console()
   ctab <- fulltab[fulltab$Species == species[i],]
 
   # surveys to get are:

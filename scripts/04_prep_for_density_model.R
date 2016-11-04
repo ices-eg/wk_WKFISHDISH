@@ -22,7 +22,7 @@ statrec <- spTransform(statrec, crs(area)) # transdorm to wgs84
 # create intermediate data files: striped down spatial data etc.
 
 for (i in seq_along(species)) {
-  cat("                                    \rWorking on species:", species[i], " (", i ,"/", length(species), ")"); flush.console()
+  cat("\rWorking on species:", species[i], " (", i ,"/", length(species), ")", rep(" ", 50)); flush.console()
 
   dat <- read.csv(paste0("species/", species[i], "/hh_with_weight.csv"))
 

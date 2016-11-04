@@ -20,7 +20,7 @@ statrec <- spTransform(statrec, crs(area)) # transdorm to wgs84
 
 
 for (i in seq_along(species)) {
-  cat("                                    \rWorking on species:", species[i], " (", i ,"/", length(species), ")"); flush.console()
+  cat("\rWorking on species:", species[i], " (", i ,"/", length(species), ")", rep(" ", 50)); flush.console()
 
   # loop over surveys
   stab <- subset(fulltab, Species == species[i])

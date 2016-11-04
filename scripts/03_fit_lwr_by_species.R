@@ -15,7 +15,7 @@ fulltab <- getControlTable()
 species <- unique(fulltab$Species)
 
 for (i in seq_along(species)) {
-  cat(rep(" ", 30), "\rWorking on species:", species[i], " (", i ,"/", length(species), ")"); flush.console()
+  cat("\rWorking on species:", species[i], " (", i ,"/", length(species), ")", rep(" ", 50)); flush.console()
 
   # species already analysed - skip to next
   if (file.exists(paste0("species/", species[i], "/hh_with_weight.csv")) & !force.fit) next
