@@ -15,8 +15,12 @@ species <- unique(fulltab$Species)
 
 # read in spatial datasets
 area <- readOGR("shapefiles", "ICES_Areas_20160601_dense")
+# hard code projection in case GDAL is not installed
+proj4string(area) <- CRS("+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0")
 statrec <- readOGR("shapefiles", "ICES_StatRec_mapto_ICES_Areas")
-statrec <- spTransform(statrec, crs(area)) # transdorm to wgs84
+# hard code projection in case GDAL is not installed
+proj4string(statrec) <- CRS("+proj=merc +a=6378137 +b=6378137 +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +no_defs")
+statrec <- spTransform(statrec, crs(area)) # transform to wgs84
 
 
 # create intermediate data files: striped down spatial data etc.
