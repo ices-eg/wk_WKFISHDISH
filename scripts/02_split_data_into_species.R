@@ -29,11 +29,11 @@ for (i in seq_along(species)) {
   row.names(toget) <- NULL
 
   # get species keys
-  aphia <- findAphia(paste0("^", species[i], "$"), regex = TRUE)
+  aphia <- findAphia(species[i])
   if (species[i] == "Anglerfish") {
     # take black and white bellied? - if so comment out these lines
     # the next line resticts us to white bellied only
-    aphia <- findAphia("white anglerfish", regex = TRUE)
+    aphia <- findAphia("white anglerfish")
   }
 
   # extract single species data for each survey
