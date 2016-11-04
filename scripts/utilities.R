@@ -7,7 +7,7 @@ download.ICESshape <- function(what) {
   download.file(paste0("http://gis.ices.dk/shapefiles/", what, ".zip"),
                 paste0("zips/", what, ".zip"))
 
-  if (!dir.exists("shapefiles")) dir.create("shapfiles")
+  if (!dir.exists("shapefiles")) dir.create("shapefiles")
   unzip(paste0("zips/", what, ".zip"), exdir = "shapefiles")
 }
 
