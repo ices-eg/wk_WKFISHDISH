@@ -1,0 +1,61 @@
+Species, Division, Survey, Survey name, Gear, Quarter, Start year, Notes
+"Megrim, Plaice, and Sole", 3.a, 2341, NS-IBTS, GOV, "1, 3", "1979, 1991",
+"Megrim, Plaice, and Sole", 3.a, 2826, BITS, TVS, "1, 4", "1996, 1999",
+"Megrim, Plaice, and Sole", "3.b, 3.c", 2826, BITS, TVS, "1, 4", "1996, 1999",
+"Megrim, Plaice, and Sole", 3.d, 2826, BITS, TVS, "1, 4", "1999, 1999",
+"Megrim, Plaice, and Sole", 4.a, 3417, BTS, BT8, 3, 1998,
+"Megrim, Plaice, and Sole", 4.b, 3417, BTS, BT8, 3, 1987,
+"Megrim, Plaice, and Sole", 4.c, 3417, BTS, BT4A, 3, 1990,
+"Megrim, Plaice, and Sole", 4.c, 3417, BTS, BT8, 3, 1987,
+"Megrim, Plaice, and Sole", 6.a, 2701, SWC-IBTS, GOV, "1, 4", "1985, 1990",
+"Megrim, Plaice, and Sole", 6.a, 3520, IE-IGFS, GOV, 4, 2003,
+"Megrim, Plaice, and Sole", 6.b, 3473, ROCKALL, GOV, 3, 1999, "Data from the years 2000,2004, and 2010 missing"
+"Megrim, Plaice, and Sole", 7.a, 3488, BTS-VIIa, BT4A, 3, 1993,
+"Megrim, Plaice, and Sole", 7.b, 3520, IE-IGFS, GOV, 4, 2003,
+"Megrim, Plaice, and Sole", 7.b, 2701, SWC-IBTS, GOV, 4, 1990, "Data from the years 2010,2011, and 2013 missing"
+"Megrim, Plaice, and Sole", 7.c, 3322, SP-PORC, PORB, 3, 2001,
+"Megrim, Plaice, and Sole", 7.c, 3520, IE-IGFS, GOV, 4, 2003, "Data from 2011 missing"
+"Megrim, Plaice, and Sole", 7.d, 3417, BTS, BT4A, 3, 1990,
+"Megrim, Plaice, and Sole", 7.e, 3417, BTS, BT4P, 3, 2006,
+"Megrim, Plaice, and Sole", 7.e, 3417, BTS, BT4S, 3, 2006,
+"Megrim, Plaice, and Sole", 7.f, 3488, BTS-VIIa, BT4A, 3, 1993,
+"Megrim, Plaice, and Sole", 7.g, 3488, BTS-VIIa, BT4A, 3, 1993,
+"Megrim, Plaice, and Sole", 7.h, 3024, EVHOE, GOV, 4, 1997,
+"Megrim, Plaice, and Sole", 7.j, 3520, IE-IGFS, GOV, 4, 2003,
+"Megrim, Plaice, and Sole", 7.j, 3024, EVHOE, GOV, 4, 1997,
+"Megrim, Plaice, and Sole", 7.k, 3322, SP-PORC, PORB, 3, 2001,
+"Megrim, Plaice, and Sole", 8.a, 3024, EVHOE, GOV, 4, 1997,
+"Megrim, Plaice, and Sole", 8.b, 3024, EVHOE, GOV, 4, 1997,
+"Megrim, Plaice, and Sole", 8.c, 3321, SP-NORTH, BAK, 4, 2001,
+"Megrim, Plaice, and Sole", 8.d, 3024, EVHOE, GOV, 4, 1997,
+"Megrim, Plaice, and Sole", 9.a, 3319, PT-IBTS, NCT, 4, 2002, "Data from the years 2003, 2004, and 2008 missing"
+"Anchovy, Anglerfish, Blue Whiting, Cod, Haddock, Hake, Herring, Horse Mackerel, Mackerel, Norway Pout, Pollack, Saithe, Spurdog, Sprat, Whiting", 3.a, 2341, NS-IBTS, GOV, "1, 3", "1979, 1991",
+"Anchovy, Anglerfish, Blue Whiting, Cod, Haddock, Hake, Herring, Horse Mackerel, Mackerel, Norway Pout, Pollack, Saithe, Spurdog, Sprat, Whiting", 3.a, 2826, BITS, TVS, "1, 4", "1996, 1999",
+"Anchovy, Anglerfish, Blue Whiting, Cod, Haddock, Hake, Herring, Horse Mackerel, Mackerel, Norway Pout, Pollack, Saithe, Spurdog, Sprat, Whiting", "3.b, 3.c", 2826, BITS, TVS, "1, 4", "1996, 1999",
+"Anchovy, Anglerfish, Blue Whiting, Cod, Haddock, Hake, Herring, Horse Mackerel, Mackerel, Norway Pout, Pollack, Saithe, Spurdog, Sprat, Whiting", 3.d, 2826, BITS, TVS, "1, 4", "1999, 1999",
+"Anchovy, Anglerfish, Blue Whiting, Cod, Haddock, Hake, Herring, Horse Mackerel, Mackerel, Norway Pout, Pollack, Saithe, Spurdog, Sprat, Whiting", 4.a, 2341, NS-IBTS, GOV, "1, 3", "1971, 1991",
+"Anchovy, Anglerfish, Blue Whiting, Cod, Haddock, Hake, Herring, Horse Mackerel, Mackerel, Norway Pout, Pollack, Saithe, Spurdog, Sprat, Whiting", 4.b, 2341, NS-IBTS, GOV, "1, 3", "1967, 1991",
+"Anchovy, Anglerfish, Blue Whiting, Cod, Haddock, Hake, Herring, Horse Mackerel, Mackerel, Norway Pout, Pollack, Saithe, Spurdog, Sprat, Whiting", 4.c, 2341, NS-IBTS, GOV, "1, 3", "1978, 1991",
+"Anchovy, Anglerfish, Blue Whiting, Cod, Haddock, Hake, Herring, Horse Mackerel, Mackerel, Norway Pout, Pollack, Saithe, Spurdog, Sprat, Whiting", 6.a, 2701, SWC-IBTS, GOV, "1, 4", "1985, 1990",
+"Anchovy, Anglerfish, Blue Whiting, Cod, Haddock, Hake, Herring, Horse Mackerel, Mackerel, Norway Pout, Pollack, Saithe, Spurdog, Sprat, Whiting", 6.a, 3520, IE-IGFS, GOV, 4, 2003,
+"Anchovy, Anglerfish, Blue Whiting, Cod, Haddock, Hake, Herring, Horse Mackerel, Mackerel, Norway Pout, Pollack, Saithe, Spurdog, Sprat, Whiting", 6.b, 3473, ROCKALL, GOV, 3, 1999, "Data from the years 2000,2004, and 2010 missing"
+"Anchovy, Anglerfish, Blue Whiting, Cod, Haddock, Hake, Herring, Horse Mackerel, Mackerel, Norway Pout, Pollack, Saithe, Spurdog, Sprat, Whiting", 7.a, 4784, NIGFS, ROR, 4, 2009,
+"Anchovy, Anglerfish, Blue Whiting, Cod, Haddock, Hake, Herring, Horse Mackerel, Mackerel, Norway Pout, Pollack, Saithe, Spurdog, Sprat, Whiting", 7.a, 3520, IE-IGFS, GOV, 4, 2003, "sparse sampling in later years (2005-)"
+"Anchovy, Anglerfish, Blue Whiting, Cod, Haddock, Hake, Herring, Horse Mackerel, Mackerel, Norway Pout, Pollack, Saithe, Spurdog, Sprat, Whiting", 7.b, 3520, IE-IGFS, GOV, 4, 2003,
+"Anchovy, Anglerfish, Blue Whiting, Cod, Haddock, Hake, Herring, Horse Mackerel, Mackerel, Norway Pout, Pollack, Saithe, Spurdog, Sprat, Whiting", 7.b, 2701, SWC-IBTS, GOV, 4, 1990, "Data from the years 2010,2011, and 2013 missing"
+"Anchovy, Anglerfish, Blue Whiting, Cod, Haddock, Hake, Herring, Horse Mackerel, Mackerel, Norway Pout, Pollack, Saithe, Spurdog, Sprat, Whiting", 7.c, 3322, SP-PORC, PORB, 3, 2001,
+"Anchovy, Anglerfish, Blue Whiting, Cod, Haddock, Hake, Herring, Horse Mackerel, Mackerel, Norway Pout, Pollack, Saithe, Spurdog, Sprat, Whiting", 7.c, 3520, IE-IGFS, GOV, 4, 2003, Data from 2011 missing
+"Anchovy, Anglerfish, Blue Whiting, Cod, Haddock, Hake, Herring, Horse Mackerel, Mackerel, Norway Pout, Pollack, Saithe, Spurdog, Sprat, Whiting", 7.d, 2341, NS-IBTS, GOV, 1, 2007,
+"Anchovy, Anglerfish, Blue Whiting, Cod, Haddock, Hake, Herring, Horse Mackerel, Mackerel, Norway Pout, Pollack, Saithe, Spurdog, Sprat, Whiting", 7.e, ?, , , , ,
+"Anchovy, Anglerfish, Blue Whiting, Cod, Haddock, Hake, Herring, Horse Mackerel, Mackerel, Norway Pout, Pollack, Saithe, Spurdog, Sprat, Whiting", 7.f, 3488, BTS-VIIa, BT4A, 3, 1993, Beam trawl survey - not optimal
+"Anchovy, Anglerfish, Blue Whiting, Cod, Haddock, Hake, Herring, Horse Mackerel, Mackerel, Norway Pout, Pollack, Saithe, Spurdog, Sprat, Whiting", 7.g, 3520, IE-IGFS, GOV, 4, 2003,
+"Anchovy, Anglerfish, Blue Whiting, Cod, Haddock, Hake, Herring, Horse Mackerel, Mackerel, Norway Pout, Pollack, Saithe, Spurdog, Sprat, Whiting", 7.g, 3024, EVHOE, GOV, 4, 1997,
+"Anchovy, Anglerfish, Blue Whiting, Cod, Haddock, Hake, Herring, Horse Mackerel, Mackerel, Norway Pout, Pollack, Saithe, Spurdog, Sprat, Whiting", 7.h, 3024, EVHOE, GOV, 4, 1997,
+"Anchovy, Anglerfish, Blue Whiting, Cod, Haddock, Hake, Herring, Horse Mackerel, Mackerel, Norway Pout, Pollack, Saithe, Spurdog, Sprat, Whiting", 7.j, 3520, IE-IGFS, GOV, 4, 2003,
+"Anchovy, Anglerfish, Blue Whiting, Cod, Haddock, Hake, Herring, Horse Mackerel, Mackerel, Norway Pout, Pollack, Saithe, Spurdog, Sprat, Whiting", 7.j, 3024, EVHOE, GOV, 4, 1997,
+"Anchovy, Anglerfish, Blue Whiting, Cod, Haddock, Hake, Herring, Horse Mackerel, Mackerel, Norway Pout, Pollack, Saithe, Spurdog, Sprat, Whiting", 7.k, 3322, SP-PORC, PORB, 3, 2001,
+"Anchovy, Anglerfish, Blue Whiting, Cod, Haddock, Hake, Herring, Horse Mackerel, Mackerel, Norway Pout, Pollack, Saithe, Spurdog, Sprat, Whiting", 8.a, 3024, EVHOE, GOV, 4, 1997,
+"Anchovy, Anglerfish, Blue Whiting, Cod, Haddock, Hake, Herring, Horse Mackerel, Mackerel, Norway Pout, Pollack, Saithe, Spurdog, Sprat, Whiting", 8.b, 3024, EVHOE, GOV, 4, 1997,
+"Anchovy, Anglerfish, Blue Whiting, Cod, Haddock, Hake, Herring, Horse Mackerel, Mackerel, Norway Pout, Pollack, Saithe, Spurdog, Sprat, Whiting", 8.c, 3321, SP-NORTH, BAK, 4, 2001,
+"Anchovy, Anglerfish, Blue Whiting, Cod, Haddock, Hake, Herring, Horse Mackerel, Mackerel, Norway Pout, Pollack, Saithe, Spurdog, Sprat, Whiting", 8.d, 3024, EVHOE, GOV, 4, 1997,
+"Anchovy, Anglerfish, Blue Whiting, Cod, Haddock, Hake, Herring, Horse Mackerel, Mackerel, Norway Pout, Pollack, Saithe, Spurdog, Sprat, Whiting", 9.a, 3319, PT-IBTS, NCT, 4, 2002, "Data from the years 2003, 2004, and 2008 missing"
