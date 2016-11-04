@@ -4,12 +4,10 @@
 #
 # -------------------------------------
 
-library(mgcv)
-library(lattice)
-library(latticeExtra)
+# load packages etc.
+source("scripts/header.R")
 
-rm(list = ls())
-source("R/utilities.R")
+
 force.fit <- FALSE
 
 # read design table and look at species
