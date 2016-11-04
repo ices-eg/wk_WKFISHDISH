@@ -15,8 +15,10 @@ species <- unique(fulltab$Species)
 
 # read in spatial datasets
 area <- readOGR("shapefiles", "ICES_Areas_20160601_dense")
+# hard code projection in case GDAL is not installed
 statrec <- readOGR("shapefiles", "ICES_StatRec_mapto_ICES_Areas")
-statrec <- spTransform(statrec, crs(area)) # transdorm to wgs84
+# hard code projection in case GDAL is not installed
+statrec <- spTransform(statrec, crs(area)) # transform to wgs84
 
 
 for (i in seq_along(species)) {
