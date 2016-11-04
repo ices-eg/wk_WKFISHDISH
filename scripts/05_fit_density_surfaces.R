@@ -13,15 +13,6 @@ source("scripts/header.R")
 fulltab <- getControlTable()
 species <- unique(fulltab$Species)
 
-# read in spatial datasets
-area <- readOGR("shapefiles", "ICES_Areas_20160601_dense")
-# hard code projection in case GDAL is not installed
-proj4string(area) <- CRS("+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0")
-statrec <- readOGR("shapefiles", "ICES_StatRec_mapto_ICES_Areas")
-# hard code projection in case GDAL is not installed
-proj4string(statrec) <- CRS("+proj=merc +a=6378137 +b=6378137 +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +no_defs")
-statrec <- spTransform(statrec, crs(area)) # transform to wgs84
-
 
 for (i in seq_along(species)) {
   cat("\rWorking on species:", species[i], " (", i ,"/", length(species), ")", rep(" ", 50)); flush.console()
@@ -39,27 +30,40 @@ for (i in seq_along(species)) {
     }
     load(file)
 
-    # fit a gam
+    # do some modelling
+    dat <- data.frame(sdat)
+    years <- unique(dat$Year)
+    nyears <- length(years)
+    dat$fStatRec <- factor(dat$StatRec, levels = sstatrec$StatRec)
+    sstatrec$fStatRec <- factor(sstatrec$StatRec)
 
+    # substitute zero with half minumum observed catch weight
+    min_weight <- min(dat$weight[dat$weight>0], na.rm = TRUE)
+    dat$adj_weight <- dat$weight
+    dat$adj_weight[dat$adj_weight == 0] <- min_weight/2
 
+    # fit for each year
+    gs <- lapply(years,
+                 function(i) {
+                   # check if there is enough data?
+                   # or wrap in a try to get it going:
+                   try(
+                     gam(log(adj_weight) ~ s(fStatRec, bs = "mrf", xt = list(penalty = Q), k = 50),
+                         data = subset(dat, Year == i),
+                         drop.unused.levels = FALSE)
+                   )
+                 })
+    names(gs) <- paste(years)
+
+    save(gs,
+         file = paste0("species/", species[i], "/intermediate_data/", stab$Survey.name[j], "_", stab$Quarter[j],"_gams.rData"))
   }
 }
 
 
 
-  # do some modelling
-  years <- unique(dat$Year)
-  nyears <- length(years)
-  dat$fStatRec <- factor(dat$StatRec, levels = statrec $ StatRec)
-  statrec$fStatRec <- factor(statrec$StatRec)
 
-  # substitute zero with half minumum observed catch weight
-  min_weight <- min(dat$weight[dat$weight>0], na.rm = TRUE)
-  dat$adj_weight <- dat$weight
-  dat$adj_weight[dat$adj_weight == 0] <- min_weight/2
 
-  # container for results
-  gs <- list()
 
   # run models
   for (i in years) {
