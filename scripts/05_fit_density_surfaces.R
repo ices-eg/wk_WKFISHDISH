@@ -44,12 +44,14 @@ for (i in seq_along(species)) {
 
     # fit for each year
     gs <- lapply(years,
-                 function(i) {
+                 function(yrs) {
                    # check if there is enough data?
                    # or wrap in a try to get it going:
+                   # set the smoothing to be related to the number of statsquares in the survey area
+                   k <- floor(nrow(sstatrec) / 5)
                    try(
-                     gam(log(adj_weight) ~ s(fStatRec, bs = "mrf", xt = list(penalty = Q), k = 50),
-                         data = subset(dat, Year == i),
+                     gam(log(adj_weight) ~ s(fStatRec, bs = "mrf", xt = list(penalty = Q), k = k),
+                         data = subset(dat, Year == yrs),
                          drop.unused.levels = FALSE)
                    )
                  })
