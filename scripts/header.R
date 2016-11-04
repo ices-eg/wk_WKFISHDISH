@@ -12,6 +12,7 @@ library(icesVocab)
 # for modelling
 library(mgcv, quietly = TRUE)
 library(gmrf, quietly = TRUE)
+library(Matrix, quietly = TRUE)
 
 # spatial stuff
 library(rgdal, quietly = TRUE)

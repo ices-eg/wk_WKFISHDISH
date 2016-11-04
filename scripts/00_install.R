@@ -5,7 +5,7 @@
 # ----------------------------
 
 # install other dependencies used in the analysis
-pkgs <- c("mgcv", "rgdal","rgeos","sp","spdep","raster","lattice","latticeExtra")
+pkgs <- c("mgcv", "rgdal","rgeos","sp","spdep","Matrix", "raster","lattice","latticeExtra")
 if (length(pkgs)) install.packages(pkgs)
 
 
