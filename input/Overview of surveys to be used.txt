@@ -46,7 +46,7 @@ Species, Division, Survey, Survey name, Gear, Quarter, Start year, Notes
 "Anchovy, Anglerfish, Blue Whiting, Cod, Haddock, Hake, Herring, Horse Mackerel, Mackerel, Norway Pout, Pollack, Saithe, Spurdog, Sprat, Whiting", 7.c, 3322, SP-PORC, PORB, 3, 2001,
 "Anchovy, Anglerfish, Blue Whiting, Cod, Haddock, Hake, Herring, Horse Mackerel, Mackerel, Norway Pout, Pollack, Saithe, Spurdog, Sprat, Whiting", 7.c, 3520, IE-IGFS, GOV, 4, 2003, Data from 2011 missing
 "Anchovy, Anglerfish, Blue Whiting, Cod, Haddock, Hake, Herring, Horse Mackerel, Mackerel, Norway Pout, Pollack, Saithe, Spurdog, Sprat, Whiting", 7.d, 2341, NS-IBTS, GOV, 1, 2007,
-"Anchovy, Anglerfish, Blue Whiting, Cod, Haddock, Hake, Herring, Horse Mackerel, Mackerel, Norway Pout, Pollack, Saithe, Spurdog, Sprat, Whiting", 7.e, ?, , , , ,
+"Anchovy, Anglerfish, Blue Whiting, Cod, Haddock, Hake, Herring, Horse Mackerel, Mackerel, Norway Pout, Pollack, Saithe, Spurdog, Sprat, Whiting", 7.e, , , , , ,
 "Anchovy, Anglerfish, Blue Whiting, Cod, Haddock, Hake, Herring, Horse Mackerel, Mackerel, Norway Pout, Pollack, Saithe, Spurdog, Sprat, Whiting", 7.f, 3488, BTS-VIIa, BT4A, 3, 1993, Beam trawl survey - not optimal
 "Anchovy, Anglerfish, Blue Whiting, Cod, Haddock, Hake, Herring, Horse Mackerel, Mackerel, Norway Pout, Pollack, Saithe, Spurdog, Sprat, Whiting", 7.g, 3520, IE-IGFS, GOV, 4, 2003,
 "Anchovy, Anglerfish, Blue Whiting, Cod, Haddock, Hake, Herring, Horse Mackerel, Mackerel, Norway Pout, Pollack, Saithe, Spurdog, Sprat, Whiting", 7.g, 3024, EVHOE, GOV, 4, 1997,
