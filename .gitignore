@@ -1,0 +1,12 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+*.Rproj
+
+# ignore some folders
+writeup/*
+species/*
+shapefiles/*
+zips/*
+datras/*
