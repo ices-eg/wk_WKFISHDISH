@@ -10,3 +10,6 @@ species/*
 shapefiles/*
 zips/*
 datras/*
+
+# ingore some files
+scripts/worksheet.R
