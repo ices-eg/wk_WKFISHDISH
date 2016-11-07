@@ -25,7 +25,7 @@ for (i in seq_along(species)) {
     # load data
     file <- paste0("species/", species[i], "/intermediate_data/", stab$Survey.name[j], "_", stab$Quarter[j],"_data.rData")
     if (!file.exists(file)) {
-      warning("missing data for: ", species[i], " ", stab$Survey.name[j], " ", stab$Quarter[j])
+      message("missing data for: ", species[i], " ", stab$Survey.name[j], " ", stab$Quarter[j])
       next
     }
     load(file)
@@ -36,6 +36,7 @@ for (i in seq_along(species)) {
     nyears <- length(years)
     dat$fStatRec <- factor(dat$StatRec, levels = sstatrec$StatRec)
     sstatrec$fStatRec <- factor(sstatrec$StatRec)
+    statrec_pred$fStatRec <- factor(statrec_pred$StatRec, levels = sstatrec$StatRec)
 
     # substitute zero with half minumum observed catch weight
     min_weight <- min(dat$weight[dat$weight>0], na.rm = TRUE)
@@ -48,7 +49,7 @@ for (i in seq_along(species)) {
                    # check if there is enough data?
                    # or wrap in a try to get it going:
                    # set the smoothing to be related to the number of statsquares in the survey area
-                   k <- floor(nrow(sstatrec) / 5)
+                   k <- max(3, min(20, floor(nrow(statrec_pred) / 5)))
                    try(
                      gam(log(adj_weight) ~ s(fStatRec, bs = "mrf", xt = list(penalty = Q), k = k),
                          data = subset(dat, Year == yrs),
@@ -61,11 +62,4 @@ for (i in seq_along(species)) {
          file = paste0("species/", species[i], "/intermediate_data/", stab$Survey.name[j], "_", stab$Quarter[j],"_gams.rData"))
   }
 }
-
-
-
-
-
-
-
 

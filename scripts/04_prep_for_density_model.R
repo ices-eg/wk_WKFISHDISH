@@ -52,7 +52,7 @@ for (i in seq_along(species)) {
     sdat <- dat[dat$Survey == stab$Survey.name[j] & dat$Quarter == stab$Quarter[j],]
 
     if (nrow(sdat) == 0) {
-      warning("missing data for: ", species[i], " ", stab$Survey.name[j], " ", stab$Quarter[j])
+      message("missing data for: ", species[i], " ", stab$Survey.name[j], " ", stab$Quarter[j])
       next
     }
 
@@ -77,12 +77,13 @@ for (i in seq_along(species)) {
     Q <- as.matrix(Q)
     colnames(Q) <- rownames(Q) <- sstatrec $ ICESNAME
     sstatrec $ StatRec <- sstatrec $ ICESNAME
+    statrec_pred $ StatRec <- statrec_pred $ ICESNAME
 
     if (!dir.exists(paste0("species/", species[i], "/intermediate_data/"))) {
       dir.create(paste0("species/", species[i], "/intermediate_data/"))
     }
 
-    save(sarea, sstatrec, sdat, Q,
+    save(sarea, sstatrec, statrec_pred, sdat, Q,
          file = paste0("species/", species[i], "/intermediate_data/", stab$Survey.name[j], "_", stab$Quarter[j],"_data.rData"))
   }
 }

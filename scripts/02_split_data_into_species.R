@@ -36,6 +36,12 @@ for (i in seq_along(species)) {
     aphia <- findAphia("white anglerfish")
   }
 
+  # save to megrim folder
+  if (!dir.exists(paste0("species/",species[i]))) {
+    dir.create(paste0("species/",species[i]))
+  }
+
+
   # extract single species data for each survey
   hh <-
     do.call(rbind,
@@ -53,6 +59,9 @@ for (i in seq_along(species)) {
                      # subset for year
                      subset(hh, Year > toget$Start.year[j])
                    }))
+  # write out data files
+  write.csv(hh, file = paste0("species/",species[i], "/hh.csv"),
+            row.names = FALSE)
 
   hl <-
     do.call(rbind,
@@ -77,6 +86,13 @@ for (i in seq_along(species)) {
                      # subset for year
                      subset(hl, Year > toget$Start.year[j])
                    }))
+
+  # standardise length to mm
+  hl <- within(hl, {length = LngtClass * ifelse(LngtCode == "1", 10, 1)})
+
+  # write out data files
+  write.csv(hl, file = paste0("species/",species[i], "/hl.csv"),
+            row.names = FALSE)
 
   ca <-
     do.call(rbind,
@@ -109,18 +125,8 @@ for (i in seq_along(species)) {
 
   # standardise length to mm
   ca <- within(ca, {length = LngtClass * ifelse(LngtCode == "1", 10, 1)})
-  hl <- within(hl, {length = LngtClass * ifelse(LngtCode == "1", 10, 1)})
-
-  # save to megrim folder
-  if (!dir.exists(paste0("species/",species[i]))) {
-    dir.create(paste0("species/",species[i]))
-  }
 
   # write out data files
-  write.csv(hh, file = paste0("species/",species[i], "/hh.csv"),
-            row.names = FALSE)
-  write.csv(hl, file = paste0("species/",species[i], "/hl.csv"),
-            row.names = FALSE)
   write.csv(ca, file = paste0("species/",species[i], "/ca.csv"),
             row.names = FALSE)
 
