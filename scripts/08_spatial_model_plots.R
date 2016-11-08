@@ -62,6 +62,12 @@ for (i in seq_along(species)) {
     statrec_pred$fStatRec <- factor(statrec_pred$StatRec, levels = sstatrec$StatRec)
 
     # data
+    # keep only converged fits
+    gs <- gs[sapply(gs, is) == "gam"]
+    if (length(gs) == 0) {
+      message("No converged models for: ", species[i], " ", stab$Survey.name[j], " ", stab$Quarter[j])
+      next
+    }
     years <- names(gs)
     fit <- sapply(years, function(yr) predict(gs[[yr]], newdata = statrec_pred))
     colnames(fit) <- years
