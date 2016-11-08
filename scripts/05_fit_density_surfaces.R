@@ -30,6 +30,12 @@ for (i in seq_along(species)) {
     }
     load(file)
 
+    # HACK!
+    # SP-NORTH and NIGFS did not read in E squares properly
+    if (stab$Survey.name[j] %in% c("SP-NORTH", "NIGFS")) {
+      sdat$StatRec <- paste0(substring(sdat$StatRec, 1, 2), "E", nchar(substring(sdat$StatRec, 3)))
+    }
+
     # do some modelling
     dat <- data.frame(sdat)
     years <- unique(dat$Year)
