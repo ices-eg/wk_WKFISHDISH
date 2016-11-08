@@ -104,10 +104,10 @@ for (i in seq_along(species)) {
 if (FALSE) {
   ## DO NOT RUN
   # move plots to sharepoint
-  from <- paste0("figures/", species, "_survey_data.pdf")
+  from <- paste0("figures/", species, "_spatial_model.pdf")
   todir <- paste0("C:/Users/colin/SharePoint/WKFISHDISH - 2016 Meeting docs/04. Working documents/Trend Analyses/",
                   species, "/Maps_survey_data")
-  to <- paste0(todir, "/", species, "_survey_data.pdf")
+  to <- paste0(todir, "/", species, "_spatial_model.pdf")
   create <- !dir.exists(todir)
   tmp <- lapply(which(create), function(i) dir.create(todir[i]))
   file.copy(from, to, overwrite = TRUE)
