@@ -53,7 +53,8 @@ for (i in seq_along(species)) {
     mtext(paste0(stab$Survey.name[j], " Q", stab$Quarter[j]), font = 2)
 
     # colours
-    cols <- gplots::rich.colors(50)
+    #cols <- gplots::rich.colors(50)
+    cols <- colorRampPalette(c("cyan", "magenta"))(50)
 
     # data
     years <- sort(unique(sdat$Year))
@@ -62,17 +63,40 @@ for (i in seq_along(species)) {
              function(yr) with(subset(data.frame(sdat), Year == yr),
                                tapply(weight, factor(StatRec, levels = statrec_pred$StatRec), mean, na.rm = TRUE)))
     colnames(obs) <- years
-    breaks <- seq(0, max(1, max(obs, na.rm = TRUE)), length = 50)
-    tmp <- obs
-    obs[] <- cols[as.numeric(cut.default(obs, breaks = breaks))]
-    obs[which(tmp == 0)] <- grey(0.7)
 
     for (k in paste(years)) {
+      tmp <- obs[,k]
+      if (all(is.na(tmp))) next
+      if (all(range(tmp, na.rm = TRUE) == c(0,0))) {
+        min <- 0.1; max <- 1
+      } else {
+        min <- min(tmp[which(tmp>0)], na.rm = TRUE)
+        min <- max(min/2, min-0.1)
+        max <- max(tmp[is.finite(tmp)], na.rm = TRUE) + 0.1
+      }
+      breaks <- exp(seq(log(min), log(max), length = 50))
+      tmp[] <- cols[as.numeric(cut.default(tmp, breaks = breaks))]
+      tmp[which(obs[,k] == 0)] <- grey(0.7)
+      tmp[which(obs[,k]>max(breaks))] <- cols[length(cols)]
+
       plot(sstatrec, xlim = bbox(sstatrec)["x",], ylim = bbox(sstatrec)["y",])
-      plot(statrec_pred, col = obs[,k], add = TRUE)
+      plot(statrec_pred, col = tmp, add = TRUE)
       mtext(paste0(species[i], " ", stab$Survey.name[j], " Q", stab$Quarter[j], " ", k), font = 2, line = -0.25)
     }
   }
   dev.off()
+}
+
+
+if (FALSE) {
+  ## DO NOT RUN
+  # move plots to sharepoint
+  from <- paste0("figures/", species, "_survey_data.pdf")
+  todir <- paste0("C:/Users/colin/SharePoint/WKFISHDISH - 2016 Meeting docs/04. Working documents/Trend Analyses/",
+                  species, "/Maps_survey_data")
+  to <- paste0(todir, "/", species, "_survey_data.pdf")
+  create <- !dir.exists(todir)
+  tmp <- lapply(which(create), function(i) dir.create(todir[i]))
+  file.copy(from, to, overwrite = TRUE)
 }
 
