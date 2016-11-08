@@ -37,17 +37,15 @@ for (i in seq_along(species)) {
     }
 
     # do some modelling
-    dat <- data.frame(sdat)
-    years <- unique(dat$Year)
+    years <- unique(sdat$Year)
     nyears <- length(years)
-    dat$fStatRec <- factor(dat$StatRec, levels = sstatrec$StatRec)
+    sdat$fStatRec <- factor(sdat$StatRec, levels = sstatrec$StatRec)
     sstatrec$fStatRec <- factor(sstatrec$StatRec)
-    statrec_pred$fStatRec <- factor(statrec_pred$StatRec, levels = sstatrec$StatRec)
 
     # substitute zero with half minumum observed catch weight
-    min_weight <- min(dat$weight[dat$weight>0], na.rm = TRUE)
-    dat$adj_weight <- dat$weight
-    dat$adj_weight[dat$adj_weight == 0] <- min_weight/2
+    min_weight <- min(sdat$weight[sdat$weight>0], na.rm = TRUE)
+    sdat$adj_weight <- sdat$weight
+    sdat$adj_weight[sdat$adj_weight == 0] <- min_weight/2
 
     # fit for each year
     gs <- lapply(years,
@@ -58,7 +56,7 @@ for (i in seq_along(species)) {
                    k <- max(3, min(20, floor(nrow(statrec_pred) / 5)))
                    try(
                      gam(log(adj_weight) ~ s(fStatRec, bs = "mrf", xt = list(penalty = Q), k = k),
-                         data = subset(dat, Year == yrs),
+                         data = subset(data.frame(sdat), Year == yrs),
                          drop.unused.levels = FALSE)
                    )
                  })
