@@ -71,6 +71,9 @@ for (i in seq_along(species)) {
     years <- names(gs)
     fit <- sapply(years, function(yr) predict(gs[[yr]], newdata = statrec_pred))
     colnames(fit) <- years
+    # trim fit to observed range
+    max_obs <- log(max(sdat$weight))
+    fit[fit > max_obs] <- max_obs
     min_weight <- min(sdat$weight[sdat$weight>0], na.rm = TRUE)
 
     for (yr in years) {
@@ -82,6 +85,8 @@ for (i in seq_along(species)) {
       tmp[] <- cols[as.numeric(cut.default(tmp, breaks = breaks))]
       # set colour of small values?
       tmp[fit[,yr] < min] <- grey(0.5)
+      # set colour of large values
+      tmp[fit[,yr] == max_obs] <- colorRampPalette("orange")(1)
 
       plot(sstatrec, xlim = bbox(sstatrec)["x",], ylim = bbox(sstatrec)["y",])
       plot(statrec_pred, col = tmp, add = TRUE)
