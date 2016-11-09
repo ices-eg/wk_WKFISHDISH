@@ -1,84 +1,40 @@
 # -------------------------------------
 #
-# Analise spatial trends
+# Analyse spatial trends
 #
 # -------------------------------------
 
 # load packages etc.
 source("scripts/header.R")
-#require(coda)
-
 
 # read design table and look at species
 fulltab <- getControlTable()
 species <- unique(fulltab$Species)
-i <- 1
-#for (i in seq_along(species)) {
+
+for (i in seq_along(species)) {
   cat("Working on species:", species[i], " (", i ,"/", length(species), ")\n"); flush.console()
 
   # what surveys are on offer
-  stab <- subset(fulltab, Species == species[i])
-
-  # only compare quarter with quarter
   qtr <- 1
-  stab <- subset(stab, Quarter == qtr)
+  stab <- subset(fulltab, Species == species[i] & Quarter == qtr)
 
   # so 28 pairings for for Megrim Q1 2007..
   # but what ones have sufficient data to estimate
   # load data
   snames <- unique(stab$Survey.name)
-  dfiles <- paste0("species/", species[i], "/intermediate_data/", snames, "_", qtr,"_data.rData")
-  gfiles <- paste0("species/", species[i], "/intermediate_data/", snames, "_", qtr,"_gams.rData")
-  if (!any(file.exists(gfiles))) {
-    message("No models for: ", species[i]," Q", qtr)
+  sfiles <- paste0("species/", species[i], "/intermediate_data/", snames, "_", qtr,"_sims.rData")
+  if (!any(file.exists(sfiles))) {
+    message("No simulations for: ", species[i]," Q", qtr)
     next
   }
   cat("\r\tWorking on", species[i], " Q", qtr); flush.console()
 
-  which.load <- which(file.exists(gfiles))
+  which.load <- which(file.exists(sfiles))
   # create environments for each survey
   envs <- lapply(snames[which.load], function(x) new.env(parent = .GlobalEnv))
   names(envs) <- snames[which.load]
   # load data and models into each environment
-  for (i in which.load) load(dfiles[i], envir = envs[[i]])
-  for (i in which.load) load(gfiles[i], envir = envs[[i]])
-  # inspectc contents
-  # ls(envs[[2]])
-
-  # simulate from each survey
-  doonesim <- function(nsim = 50, subareas) {
-    #attach(envs[[3]])
-    gs <- gs[sapply(gs, is) == "gam"]
-    years <- names(gs)
-    nyears <- length(years)
-    nsubareas <- length(subareas)
-
-    sstatrec$fStatRec <- factor(sstatrec$StatRec)
-    sstatrec$subarea <- sapply(strsplit(sstatrec$Max_Area, "[.]"), function(x) paste(x[1:2], collapse = "."))
-    sstatrec <- sstatrec[sstatrec$subarea %in% subareas,]
-
-    # simulate from each subarea
-    sims <- array(NA_real_, c(nyears, nsubareas, nsim), dimnames = list(years, subareas, NULL))
-    X <- predict(gs[[1]], newdata = data.frame(sstatrec), type = "lpmatrix")
-    for (yr in years) {
-      g <- gs[[yr]]
-      fsim <- MASS::mvrnorm(nsim, coef(g), g$Vp) %*% t(X)
-      sims[yr,,] <- apply(exp(fsim), 1, function(x) c(tapply(x, sstatrec$subarea, mean)))
-    }
-    sims
-  }
-
-  sims <-
-    lapply(1:length(envs),
-      function(i) {
-        environment(doonesim) <- envs[[i]]
-        subareas <- trimws(stab$Division)[stab$Survey.name == names(envs)[i]]
-        doonesim(nsim = 50, subareas = subareas)
-      })
-
-  names(sims) <- names(envs)
-
-  # done!
+  for (i in which.load) load(sfiles[i], envir = envs[[i]])
 
   # what comparisons do we run
   comps <- lapply(stab$Division, function(x)  which(stab$Division != x))
@@ -87,37 +43,27 @@ i <- 1
   pairings <- unique(t(apply(pairings, 1, sort)))
 
   # select a pair to analyse
-  k <- 1
-  pair <- pairings[k,]
+  for (k in 1:nrow(pairings)) {
+    pair <- pairings[k,]
+    scomp <- stab[pair,]
 
-  scomp <- stab[pair,]
-  # make copies of appropriate data
-  sim1 <- sims[[scomp$Survey.name[1]]][,trimws(scomp$Division[1]),]
-  sim2 <- sims[[scomp$Survey.name[2]]][,trimws(scomp$Division[2]),]
+    # make copies of appropriate data
+    sim1 <- envs[[scomp$Survey.name[1]]]$sims[,trimws(scomp$Division[1]),]
+    sim2 <- envs[[scomp$Survey.name[2]]]$sims[,trimws(scomp$Division[2]),]
 
-  common_years <- intersect(dimnames(sim1)[[1]], dimnames(sim2)[[1]])
+    common_years <- intersect(dimnames(sim1)[[1]], dimnames(sim2)[[1]])
 
-  # calculate ratio for common years
-  main <- paste("log ratio ", scomp$Division[1], "/", scomp$Division[2])
-  matplot(log(sim1[common_years,]) - log(sim2[common_years,]), type = "l", main = main)
+    # calculate ratio for common years
+    lograt <- log(sim1[common_years,]) - log(sim2[common_years,])
 
+    year <- as.numeric(common_years)
+
+    slope.sim <- apply(lograt, 2, function(x) coef(lm(x ~ year))["year"])
+    hist(slope.sim)
 
 
 
   # analyse cpue by area
-
-  # fit a trend model to each simulated time series
-  fitsims <- sims
-  for (sa in subareas) {
-    cat("                              \rfitting area", sa); flush.console()
-    # fit to each simulation
-    fitsims[,sa,] <-
-      sapply(1:nsim,
-             function(i) {
-               x <- sims[,sa,i]
-               exp(fitted(gam(log(x) ~ s(years, m = 2, k = nyears-1))))
-             })
-  }
 
   # plot
   pdf("figure/temporal_subarea_plots.pdf", onefile = TRUE)
