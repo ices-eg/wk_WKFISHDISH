@@ -20,6 +20,7 @@ for (i in seq_along(species)) {
 
   # simulate by quarter and survey
   stab <- unique(stab[c("Survey.name", "Quarter")])
+  stab <- stab[complete.cases(stab),]
 
   for (j in 1:nrow(stab)) {
 
@@ -41,9 +42,6 @@ for (i in seq_along(species)) {
       sdat$StatRec <- paste0(substring(sdat$StatRec, 1, 2), "E", nchar(substring(sdat$StatRec, 3)))
     }
 
-    # colours
-    #cols <- gplots::rich.colors(50)
-    cols <- colorRampPalette(c("cyan", "magenta"))(50)
 
     # covariates
     statrec_pred$fStatRec <- factor(statrec_pred$StatRec, levels = sstatrec$StatRec)
@@ -58,10 +56,11 @@ for (i in seq_along(species)) {
 
     nsim <- 1000
 
-    gs <- gs[sapply(gs, is) == "gam"]
     years <- names(gs)
     nyears <- length(years)
     subareas <- unique(trimws(stab_full$Division)[stab_full$Survey.name == stab$Survey.name[j]])
+    # make sure the survey covers the reported subareas
+    subareas <- intersect(subareas,  sstatrec$subarea)
     nsubareas <- length(subareas)
 
     sstatrec$fStatRec <- factor(sstatrec$StatRec)
