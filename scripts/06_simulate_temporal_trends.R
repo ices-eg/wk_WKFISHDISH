@@ -45,6 +45,8 @@ for (i in seq_along(species)) {
 
     # covariates
     statrec_pred$fStatRec <- factor(statrec_pred$StatRec, levels = sstatrec$StatRec)
+    sstatrec$fStatRec <- factor(sstatrec$StatRec)
+    sstatrec$subarea <- sapply(strsplit(sstatrec$Max_Area, "[.]"), function(x) paste(x[1:2], collapse = "."))
 
     # data
     # keep only converged fits
@@ -62,10 +64,8 @@ for (i in seq_along(species)) {
     # make sure the survey covers the reported subareas
     subareas <- intersect(subareas,  sstatrec$subarea)
     nsubareas <- length(subareas)
-
-    sstatrec$fStatRec <- factor(sstatrec$StatRec)
-    sstatrec$subarea <- sapply(strsplit(sstatrec$Max_Area, "[.]"), function(x) paste(x[1:2], collapse = "."))
     sstatrec <- sstatrec[sstatrec$subarea %in% subareas,]
+
 
     # simulate from each subarea
     sims <- array(NA_real_, c(nyears, nsubareas, nsim), dimnames = list(years, subareas, NULL))
