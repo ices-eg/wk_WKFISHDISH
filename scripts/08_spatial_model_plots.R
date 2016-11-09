@@ -105,8 +105,7 @@ if (FALSE) {
   ## DO NOT RUN
   # move plots to sharepoint
   from <- paste0("figures/", species, "_spatial_model.pdf")
-  todir <- paste0("C:/Users/colin/SharePoint/WKFISHDISH - 2016 Meeting docs/04. Working documents/Trend Analyses/",
-                  species, "/Maps_survey_data")
+  todir <- paste0("C:/Users/colin/SharePoint/WKFISHDISH - 2016 Meeting docs/04. Working documents/spatial_model_fits")
   to <- paste0(todir, "/", species, "_spatial_model.pdf")
   create <- !dir.exists(todir)
   tmp <- lapply(which(create), function(i) dir.create(todir[i]))
