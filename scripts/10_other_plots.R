@@ -8,7 +8,6 @@
 source("scripts/header.R")
 
 # read in spatial datasets
-#load("input/spatial_data.rData")
 load("input/spatial_model_data.rData")
 
 #plot
@@ -26,7 +25,7 @@ dev.off()
 
 #plot
 png("figures/spatial_smoother_structure.png",
-    width = 7, height = 7, units = "in", pointsize = 12,
+    width = 7, height = 7, units = "in", pointsize = 8,
     bg = "white", res = 600,
     type = "cairo-png")
   # plot regions with names
@@ -39,7 +38,7 @@ png("figures/spatial_smoother_structure.png",
   segments(xy[nbs[,1],1], xy[nbs[,1],2],
            xy[nbs[,2],1], xy[nbs[,2],2],
            col = "blue")
-  points(xy, pch = 16, col = "red", cex = 0.7)
+  points(xy, pch = 16, col = "red", cex = 0.4)
 dev.off()
 
 
