@@ -30,7 +30,7 @@ hh$haulID <- makehaulID(hh)
 
 # keep only useful columns
 hh <- hh[c("Survey", "Quarter", "haulID",
-           "Year", "Month", "Day", "ShootLat", "ShootLong", "StatRec")]
+           "Year", "Month", "Day", "ShootLat", "ShootLong", "HaulDur", "StatRec")]
 
 # write out comined HH file
 write.csv(hh, file = paste0("input/hh.csv"), row.names = FALSE)

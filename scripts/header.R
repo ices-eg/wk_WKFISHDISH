@@ -13,6 +13,8 @@ library(icesVocab)
 library(mgcv, quietly = TRUE)
 library(gmrf, quietly = TRUE)
 library(Matrix, quietly = TRUE)
+library(lubridate, quietly = TRUE)
+
 
 # spatial stuff
 library(rgdal, quietly = TRUE)

@@ -7,36 +7,35 @@
 # load packages etc.
 source("scripts/header.R")
 
-
 force.fit <- FALSE
 
 # read design table and look at species
 fulltab <- getControlTable()
 species <- unique(fulltab$Species)
 
+
 for (i in seq_along(species)) {
   cat("\rWorking on species:", species[i], " (", i ,"/", length(species), ")", rep(" ", 50)); flush.console()
 
   # species already analysed - skip to next
-  if (file.exists(paste0("species/", species[i], "/hh_with_weight.csv")) & !force.fit) next
+  if (file.exists(paste0("species/", species[i], "/hh_weight.csv")) & !force.fit) next
 
-  hh <- read.csv(paste0("species/", species[i], "/hh.csv"))
+  hh <- read.csv(paste0("input/hh.csv"))
   hl <- read.csv(paste0("species/", species[i], "/hl.csv"))
   ca <- read.csv(paste0("species/", species[i], "/ca.csv"))
 
   # merge
-  keycols <- intersect(names(hh), names(hl))
-  hl <- dplyr::left_join(hl, hh, by = keycols)
-  ca <- dplyr::left_join(ca, hh, by = keycols)
+  hl <- dplyr::left_join(hl, hh, by = c("Survey", "Quarter", "haulID"))
+  ca <- dplyr::left_join(ca, hh, by = c("Survey", "Quarter", "haulID"))
 
-  # model weight length relationship
+  # drop ca data that has no link to hh data
+  if (any(is.na(ca$ShootLong))) warning(sum(is.na(ca$ShootLong)), " ca data are not linked to HH")
+  ca <- subset(ca, !is.na(ShootLong))
+
+
+  # remove wrong data
   # ----------------------
-  hl <-
-    within(hl,
-           {
-             fYear_a <- fYear_b <- factor(Year)
-             Year_a <- Year_b <- Year
-           })
+
   if (species[i] == "Anchovy") {
     ca <- subset(ca, Year != 2015)
   }
@@ -45,39 +44,43 @@ for (i in seq_along(species)) {
   }
   if (species[i] == "Sprat") {
     ca <- subset(ca, !(Year == 2002 & length > 250) &
-                     !(Year == 2005 & IndWgt > 43) &
-                     !(Year == 2006) &
-                     !(Year == 2007 & IndWgt > 50))
+                   !(Year == 2005 & IndWgt > 43) &
+                   !(Year == 2006) &
+                   !(Year == 2007 & IndWgt > 50))
     ca$IndWgt[ca$IndWgt == 0] <- min(ca$IndWgt[ca$IndWgt > 0])
   }
-  ca <-
-    within(ca,
-           {
-             fYear_a <- fYear_b <- factor(Year, levels = levels(hl$fYear_a))
-             Year_a <- Year_b <- Year
-           })
+  if (species[i] == "Megrim") {
+    ca <- subset(ca, !(Year == 2015 & length > 300 & IndWgt < 50))
+  }
+
+  # model weight length relationship
+  # ----------------------
+  # add covariates
+  hl <- within(hl, {
+    fYear_a <- fYear_b <- factor(Year)
+    Year_a <- Year_b <- Year
+    date = lubridate::ymd(paste(Year, Month, Day))
+    yday = yday(date)
+  })
+  ca <- within(ca, {
+    fYear_a <- fYear_b <- factor(Year, levels = levels(hl$fYear_a))
+    Year_a <- Year_b <- Year
+    date = lubridate::ymd(paste(Year, Month, Day))
+    yday = yday(date)
+  })
 
 
   # NOTE set k!
   year_k <- min(ceiling(length(unique(ca$Year))/2), 9)
 
-  if (species[i] %in% c("Megrim")) {
-    lwr <- gam(IndWgt ~ 1 + s(fYear_a, bs = "re") + s(Year_a, k = year_k) +
-                 log(length) + s(fYear_b, by = log(length), bs = "re") +
-                 s(Year_b, k = year_k, by = log(length)),
-               data = ca, select = TRUE, family = Gamma(log),
-               drop.unused.levels = FALSE)
-    func <- identity
-  } else {
-    lwr <- gam(log(IndWgt) ~ 1 + s(fYear_a, bs = "re") + s(Year_a, k = year_k) +
+  lwr <- gam(log(IndWgt) ~ 1 + s(fYear_a, bs = "re") + s(Year_a, k = year_k) +
                  log(length) + s(fYear_b, by = log(length), bs = "re") +
                  s(Year_b, k = year_k, by = log(length)),
                data = ca, select = TRUE, family = gaussian(),
                drop.unused.levels = FALSE)
-    func <- exp
-  }
+  func <- exp
 
-  save(lwr, file = paste0("species/", species[i], "/lwr.rData"))
+  save(lwr, func, file = paste0("species/", species[i], "/lwr.rData"))
   chk1 <- capture.output(summary(lwr))
 
   # plot to check
@@ -91,7 +94,7 @@ for (i in seq_along(species)) {
 
   # plot model fit and diagnostics
   pdf(paste0("species/", species[i], "/lwr_plots.pdf"), onefile = TRUE)
-  plot(lwr, all = TRUE, pages = 1)
+  plot.gam(lwr, all = TRUE, pages = 1, scale = 0, shade = TRUE)
 
   op <- par(mfrow = c(2,2), no.readonly = TRUE)
   chk2 <- capture.output(gam.check(lwr,pch=19,cex=.3))
@@ -116,17 +119,25 @@ for (i in seq_along(species)) {
   # calculate total weight by haul and convert to CPUE
   # then merge onto hh
   hl$weight <- hl$HLNoAtLngt * func(predict(lwr, newdata = hl, type = "response"))
-  hl$key <- apply(hl[keycols], 1, makekey)
-  wt_tab <- tapply(hl$weight, hl$key, sum, na.rm=TRUE)
+  wt_tab <- tapply(hl$weight, hl$haulID, sum, na.rm=TRUE)
   # merge
-  hh$key <- apply(hh[keycols], 1, makekey)
-  hh$weight <- wt_tab[hh$key]
+  hh$weight <- wt_tab[hh$haulID]
   hh$weight[is.na(hh$weight)] <- 0
   # convert to cpue
   hh$weight <- hh$weight / hh$HaulDur * 60
 
   # write out amended hh data file
-  write.csv(hh, file = paste0("species/",species[i], "/hh_with_weight.csv"),
+  write.csv(hh["weight"], file = paste0("species/",species[i], "/hh_weight.csv"),
             row.names = FALSE)
 
 }
+
+# join together hh_weights
+
+hh <- read.csv("input/hh.csv")
+for (i in seq_along(species)) {
+  x <- read.csv(paste0("species/",species[i], "/hh_weight.csv"))
+  hh[gsub(" ", "_", species[i])] <- x
+}
+
+write.csv(hh, file = paste0("input/hh_with_weight.csv"), row.names = FALSE)
