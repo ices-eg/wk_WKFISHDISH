@@ -9,10 +9,29 @@ source("scripts/header.R")
 
 # read design table and look at species
 fulltab <- getControlTable()
-species <- unique(fulltab$Species)
+areas <- unique(fulltab$Division)
+
+# read in spatial datasets
+load("input/spatial_data.rData")
+
+
+#plot
+png("figures/TAC_units.png",
+    width = 7, height = 7, units = "in", pointsize = 12,
+    bg = "white", res = 600,
+    type = "cairo-png")
+  # plot regions with names
+  plot(area, col = gplots::rich.colors(nrow(area), alpha = 0.5), border = grey(0.4))
+  text(sp::coordinates(area),
+       labels = area$SubAreaDiv,
+       cex = 0.45, font = 2)
+dev.off()
 
 
 
+
+
+if (FALSE) {
 
 # model anomaly fit plotting
 # set up color scale
@@ -65,4 +84,4 @@ for (i in unique(dat$Year)) {
 
 dev.off()
 
-
+}

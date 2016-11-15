@@ -83,6 +83,7 @@ getControlTable <- function() {
                tab[orig.row,c("Division", "Survey.name", "Gear", "Quarter", "Start.year")])
 
   tab$Survey.name <- trimws(tab$Survey.name)
+  tab$Division <- trimws(tab$Division)
 
   row.names(tab) <- NULL
   tab
