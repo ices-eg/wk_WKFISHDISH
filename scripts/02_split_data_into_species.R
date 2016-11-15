@@ -22,6 +22,16 @@ hh <-
                    # drop record type column
                    hh <- hh[!names(hh) %in% "RecordType"]
                  }))
+# create haul ID
+makehaulID <- function(x) {
+  with(x, paste(Survey, Quarter, Country, Ship, StNo, HaulNo, Year, sep=":"))
+}
+hh$haulID <- makehaulID(hh)
+
+# keep only useful columns
+hh <- hh[c("Survey", "Quarter", "haulID",
+           "Year", "Month", "Day", "ShootLat", "ShootLong", "StatRec")]
+
 # write out comined HH file
 write.csv(hh, file = paste0("input/hh.csv"), row.names = FALSE)
 
@@ -47,14 +57,15 @@ fnames <- dir("datras/", pattern = "hl_")
 for (i in seq_along(fnames)) {
   x <- read.csv(paste0("datras/", fnames[i]))
 
-  # drop record type column
-  x <- x[!names(x) %in% "RecordType"]
-
-  # keep only non-NA weights
-  x <- subset(x, !is.na(IndWgt))
-
   # standardise length to mm
   x <- within(x, {length = LngtClass * ifelse(LngtCode == "1", 10, 1)})
+
+  # create key
+  x$haulID <- makehaulID(x)
+
+  # keep only useful columns
+  x <- x[names(x) %in% c("Survey", "Quarter", "haulID",
+                         "Valid_Aphia", "HLNoAtLngt", "length")]
 
   for (j in seq_along(aphia)) {
     # subset for species
@@ -77,14 +88,18 @@ fnames <- dir("datras/", pattern = "ca_")
 for (i in seq_along(fnames)) {
   x <- read.csv(paste0("datras/", fnames[i]))
 
-  # drop record type column
-  x <- x[!names(x) %in% "RecordType"]
+  # standardise length to mm
+  x <- within(x, {length = LngtClass * ifelse(LngtCode == "1", 10, 1)})
 
   # keep only non-NA weights
   x <- subset(x, !is.na(IndWgt))
 
-  # standardise length to mm
-  x <- within(x, {length = LngtClass * ifelse(LngtCode == "1", 10, 1)})
+  # create key
+  x$haulID <- makehaulID(x)
+
+  # keep only useful columns
+  x <- x[names(x) %in% c("Survey", "Quarter", "haulID",
+                         "Valid_Aphia", "IndWgt", "length")]
 
   for (j in seq_along(aphia)) {
     # subset for species
