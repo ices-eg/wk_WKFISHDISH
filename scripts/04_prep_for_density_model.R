@@ -7,9 +7,8 @@
 # load packages etc.
 source("scripts/header.R")
 
-# read design table and look at species
-fulltab <- getControlTable()
-species <- unique(fulltab$Species)
+# read in spatial datasets
+load("input/spatial_data.rData")
 
 # load data
 dat <- read.csv(paste0("input/hh_with_weight.csv"))
@@ -21,17 +20,21 @@ dat <- dat[complete.cases(dat),]
 coordinates(dat) <- ~ ShootLong + ShootLat
 crs(dat) <- crs(statrec)
 
-# read in spatial datasets
-load("input/spatial_data.rData")
+# first adjust haul locations as quit a few lie exactly on the boundaries of statrecs!
+dat@coords <- coordinates(dat) + 1e-5
+tmp <- gContains(statrec, dat, byid = TRUE)
 
-# only use statsquares that have been sampled at least once ? twice?
-tmp <- colSums(gContains(statrec, dat, byid = TRUE))
-statrec <- statrec[which(tmp > 0 |
-                         statrec$ICESNAME %in% c("28E3", "28E4",
-                                                         "27E4", "27E5", "27E6",
-                                                         "26E4", "26E5",
-                                                         "25E4",
-                                                         "24E4")),]
+# add statrec column to data
+dat$StatRec <- statrec$ICESNAME[apply(tmp, 1, function(x) which(x==1))]
+
+# only use statsquares that have been sampled at least once
+# and add in un sampled stat squares in
+statrec <- statrec[statrec$ICESNAME %in% c(unique(dat$StatRec),
+                                           "28E3", "28E4",
+                                                   "27E4", "27E5", "27E6",
+                                                   "26E4", "26E5",
+                                                   "25E4",
+                                                   "24E4"),]
 
 # prepare GMRF for spatial model
 adj <- spdep::poly2nb(statrec, queen = FALSE)
@@ -49,10 +52,10 @@ adj <- dropcon(adj, "40G1", "40G2")
 adj <- dropcon(adj, "39G1", "39G2")
 
 # form penalty
-adj <- spdep::nb2mat(adj, style = "B", zero.policy = TRUE)
-Q <- methods::as(adj, "dgTMatrix")
+adjmat <- spdep::nb2mat(adj, style = "B", zero.policy = TRUE)
+Q <- methods::as(adjmat, "dgTMatrix")
 Q @ x[] <- -1/Q @ x
-diag(Q) <- rowSums(adj)
+diag(Q) <- rowSums(adjmat)
 Q <- as.matrix(Q)
 colnames(Q) <- rownames(Q) <- statrec$ICESNAME
 statrec$StatRec <- statrec$ICESNAME
