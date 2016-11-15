@@ -7,129 +7,96 @@
 # load packages etc.
 source("scripts/header.R")
 
-
-
 # read design table and look at species
 fulltab <- getControlTable()
 species <- unique(fulltab$Species)
 
-for (i in seq_along(species)) {
-  cat("\rAggregating species:", species[i], rep(" ", 50)); flush.console()
-  ctab <- fulltab[fulltab$Species == species[i],]
+# get hh data
+hh <-
+  do.call(rbind,
+          lapply(dir("datras/", pattern = "hh_"),
+                 function(fname) {
+                   # read data
+                   hh <- read.csv(paste0("datras/", fname))
 
-  # surveys to get are:
-  toget <- unique(ctab[c("Survey.name", "Quarter", "Start.year")])
-  tab <- with(toget, tapply(Start.year, list(Survey.name, Quarter), min))
-  toget <- expand.grid(Survey.name = gsub("[[:space:]]*$", "",rownames(tab)),
-                       Quarter = as.integer(colnames(tab)),
-                       stringsAsFactors = FALSE,
-                       KEEP.OUT.ATTRS = FALSE)
-  toget$Start.year <- c(tab)
-  toget <- toget[!is.na(toget$Start.year),]
-  row.names(toget) <- NULL
+                   # drop record type column
+                   hh <- hh[!names(hh) %in% "RecordType"]
+                 }))
+# write out comined HH file
+write.csv(hh, file = paste0("input/hh.csv"), row.names = FALSE)
 
-  # get species keys
-  aphia <- findAphia(species[i])
-  if (species[i] == "Anglerfish") {
-    # take black and white bellied? - if so comment out these lines
-    # the next line resticts us to white bellied only
-    aphia <- findAphia("white anglerfish")
-  }
+# split files by species
+aphia <-
+  lapply(species, function(sp) {
+    aphia <- findAphia(sp)
+    if (sp == "Anglerfish") {
+      # take black and white bellied? - if so comment out these lines
+      # the next line resticts us to white bellied only
+      aphia <- findAphia("white anglerfish")
+    }
+    aphia
+  })
 
-  # save to megrim folder
-  if (!dir.exists(paste0("species/",species[i]))) {
-    dir.create(paste0("species/",species[i]))
-  }
+# create species folders
+create <- !dir.exists(paste0("species/",species))
+sapply(paste0("species/",species)[create], dir.create)
 
 
-  # extract single species data for each survey
-  hh <-
-    do.call(rbind,
-            lapply(1:nrow(toget),
-                   function(j) {
-                     # get survey file names
-                     fname <- dir("datras")[grep(paste0("hh_", toget$Survey.name[j], "_[[:digit:]]+-[[:digit:]]+_", toget$Quarter[j], ".csv"), dir("datras"))]
+# read hl
+fnames <- dir("datras/", pattern = "hl_")
+for (i in seq_along(fnames)) {
+  x <- read.csv(paste0("datras/", fnames[i]))
 
-                     # read data
-                     hh <- read.csv(paste0("datras/", fname))
-
-                     # drop record type column
-                     hh <- hh[!names(hh) %in% "RecordType"]
-
-                     # subset for year
-                     subset(hh, Year > toget$Start.year[j])
-                   }))
-  # write out data files
-  write.csv(hh, file = paste0("species/",species[i], "/hh.csv"),
-            row.names = FALSE)
-
-  hl <-
-    do.call(rbind,
-            lapply(1:nrow(toget),
-                   function(j) {
-                     # get survey file names
-                     fname <- dir("datras")[grep(paste0("hl_", toget$Survey.name[j], "_[[:digit:]]+-[[:digit:]]+_", toget$Quarter[j], ".csv"), dir("datras"))]
-
-                     # read data
-                     hl <- read.csv(paste0("datras/", fname))
-
-                     # drop record type column
-                     hl <- hl[!names(hl) %in% "RecordType"]
-
-                     # subset for species
-                     hl <- hl[hl$Valid_Aphia %in% aphia,]
-
-                     if (length(unique(hl$Valid_Aphia)) > 1) {
-                       warning("more than one species selected!!")
-                     }
-
-                     # subset for year
-                     subset(hl, Year > toget$Start.year[j])
-                   }))
-
-  # standardise length to mm
-  hl <- within(hl, {length = LngtClass * ifelse(LngtCode == "1", 10, 1)})
-
-  # write out data files
-  write.csv(hl, file = paste0("species/",species[i], "/hl.csv"),
-            row.names = FALSE)
-
-  ca <-
-    do.call(rbind,
-            lapply(1:nrow(toget),
-                   function(j) {
-                     # get survey file names
-                     fname <- dir("datras")[grep(paste0("ca_", toget$Survey.name[j], "_[[:digit:]]+-[[:digit:]]+_", toget$Quarter[j], ".csv"), dir("datras"))]
-
-                     # read data
-                     ca <- read.csv(paste0("datras/", fname))
-
-                     # drop record type column
-                     ca <- ca[!names(ca) %in% "RecordType"]
-
-                     # subset for species
-                     ca <- ca[ca$Valid_Aphia %in% aphia,]
-
-                     if (length(unique(ca$Valid_Aphia)) > 1) {
-                       warning("more than one species selected!!")
-                     }
-
-                     # subset for year
-                     ca <- subset(ca, Year > toget$Start.year[j])
-
-                     ca
-                   }))
+  # drop record type column
+  x <- x[!names(x) %in% "RecordType"]
 
   # keep only non-NA weights
-  ca <- subset(ca, !is.na(IndWgt))
+  x <- subset(x, !is.na(IndWgt))
 
   # standardise length to mm
-  ca <- within(ca, {length = LngtClass * ifelse(LngtCode == "1", 10, 1)})
+  x <- within(x, {length = LngtClass * ifelse(LngtCode == "1", 10, 1)})
 
-  # write out data files
-  write.csv(ca, file = paste0("species/",species[i], "/ca.csv"),
-            row.names = FALSE)
+  for (j in seq_along(aphia)) {
+    # subset for species
+    sub_x <- x[x$Valid_Aphia %in% aphia[[j]],]
 
-  # done
+    # append to file
+    write.table(sub_x,
+                file = paste0("species/",species[j], "/hl.csv"),
+                row.names = FALSE,
+                sep = ",",
+                col.names = (i == 1),
+                append = (i != 1))
+  }
+}
+
+
+
+# read ca
+fnames <- dir("datras/", pattern = "ca_")
+for (i in seq_along(fnames)) {
+  x <- read.csv(paste0("datras/", fnames[i]))
+
+  # drop record type column
+  x <- x[!names(x) %in% "RecordType"]
+
+  # keep only non-NA weights
+  x <- subset(x, !is.na(IndWgt))
+
+  # standardise length to mm
+  x <- within(x, {length = LngtClass * ifelse(LngtCode == "1", 10, 1)})
+
+  for (j in seq_along(aphia)) {
+    # subset for species
+    sub_x <- x[x$Valid_Aphia %in% aphia[[j]],]
+
+    # append to file
+    write.table(sub_x,
+                file = paste0("species/",species[j], "/ca.csv"),
+                row.names = FALSE,
+                sep = ",",
+                col.names = (i == 1),
+                append = (i != 1))
+  }
 }
 
