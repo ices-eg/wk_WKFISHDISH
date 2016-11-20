@@ -17,3 +17,4 @@ scripts/worksheet.R
 input/hh.csv
 input/hh_with_weight.csv
 input/spatial_model_data.rData
+*.sqlite
