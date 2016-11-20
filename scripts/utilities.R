@@ -237,3 +237,16 @@ fit_surface <- function(df) {
   }
 }
 
+
+# simulate by regions -------------------
+
+sim_cpue <- function(mod, nsim = 1000) {
+  if (is.null(mod)) {
+    return(NULL)
+  }
+  X <- predict(mod, newdata = statrec, type = "lpmatrix")
+  bsim <- MASS::mvrnorm(nsim, coef(mod), mod$Vp)
+  sim <- exp(X %*% t(bsim))
+  t(apply(sim, 2, function(x) tapply(x, statrec$SubAreaDiv, mean)))
+}
+

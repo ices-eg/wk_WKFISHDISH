@@ -19,3 +19,5 @@ input/hh_with_weight.csv
 input/spatial_model_data.rData
 *.sqlite
 input/cpue_lwr.rdata
+input/fitted_surfaces.rdata
+input/simulated_cpue.rdata
