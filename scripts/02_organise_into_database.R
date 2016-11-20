@@ -84,15 +84,4 @@ for (i in seq_along(fnames)) {
   dbWriteTable(con, "ca", x, append = i > 1, overwrite = i == 1)
 }
 
-
-dbListTables(con)
-
-dbListFields(con, "hh")
-#dbReadTable(con, "hh")
-
-# You can fetch all results:
-res <- dbSendQuery(con, "SELECT * FROM hl")
-dbFetch(res,n = 1)
-dbClearResult(res)
-
 dbDisconnect(con)
