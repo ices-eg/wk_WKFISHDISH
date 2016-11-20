@@ -1,6 +1,6 @@
 # -------------------------------------
 #
-# Fit density surface for each survey
+# Fit density surface for each species
 #
 # -------------------------------------
 
@@ -8,62 +8,62 @@
 # load packages etc.
 source("scripts/header.R")
 
-
 # read design table and look at species
 fulltab <- getControlTable()
 species <- unique(fulltab$Species)
 
+# read in spatial datasets
+load("input/spatial_model_data.rData")
 
+# subset to > 2001
+dat <- dat[dat$Year > 2001,]
+
+# modelling setup
+years <- unique(dat$Year)
+nyears <- length(years)
+dat$fStatRec <- factor(dat$StatRec, levels = statrec$StatRec)
+statrec$fStatRec <- factor(statrec$StatRec)
+dat$fYear <- factor(dat$Year)
+dat$SurveyQuart <- factor(paste(dat$Survey, dat$Quarter, sep=":"))
+
+# substitute zero with half minumum observed catch weight
+adj_dat <- data.frame(dat)
+adj_dat[gsub(" ", "_", species)] <-
+  lapply(adj_dat[gsub(" ", "_", species)],
+       function(x) {
+         min_x <- min(x[x>0], na.rm = TRUE)
+         adj_x <- x
+         adj_x[adj_x == 0] <- min_x/2
+         adj_x
+       })
+
+form <- y ~ s(fStatRec, bs = "mrf", xt = list(penalty = Q), k = 40, by = fYear) +
+            fYear
+
+i <- 7
 for (i in seq_along(species)) {
   cat("\rWorking on species:", species[i], " (", i ,"/", length(species), ")", rep(" ", 50)); flush.console()
+  # do some modelling
+  adj_dat$y <- log(adj_dat[[gsub(" ", "_", species[i])]])
 
-  # loop over surveys
-  stab <- subset(fulltab, Species == species[i])
-  stab <- unique(stab[c("Survey.name", "Quarter")])
+  g <- gam(form,
+           data = subset(adj_dat, SurveyQuart == levels(dat$SurveyQuart)[8]),
+           drop.unused.levels = FALSE)
 
-  for (j in 1:nrow(stab)) {
-    # load data
-    file <- paste0("species/", species[i], "/intermediate_data/", stab$Survey.name[j], "_", stab$Quarter[j],"_data.rData")
-    if (!file.exists(file)) {
-      message("missing data for: ", species[i], " ", stab$Survey.name[j], " ", stab$Quarter[j])
-      next
-    }
-    load(file)
+  fits <-
+    sapply(sort(years), function(yr) {
+      X <- predict(g,
+                   newdata = cbind(data.frame(statrec), Year = yr, fYear = factor(yr), SurveyQuart = "NS-IBTS:1"),
+                   type = "lpmatrix")
+      b <- coef(g)
+      b[grep("SurveyQuart", names(b))] <- 0
+      fit <- drop(X%*%b)
+      c(tapply(exp(fit), statrec$SubAreaDiv, mean))
+    })
+  fits <- t(fits/apply(fits, 1, mean))
 
-    # HACK!
-    # SP-NORTH and NIGFS did not read in E squares properly
-    if (stab$Survey.name[j] %in% c("SP-NORTH", "NIGFS")) {
-      sdat$StatRec <- paste0(substring(sdat$StatRec, 1, 2), "E", nchar(substring(sdat$StatRec, 3)))
-    }
+  matplot(sort(years), fits[,grep("4", colnames(fits))], type = "l")
+  matplot(sort(years), fits, type = "l")
 
-    # do some modelling
-    years <- unique(sdat$Year)
-    nyears <- length(years)
-    sdat$fStatRec <- factor(sdat$StatRec, levels = sstatrec$StatRec)
-    sstatrec$fStatRec <- factor(sstatrec$StatRec)
-
-    # substitute zero with half minumum observed catch weight
-    min_weight <- min(sdat$weight[sdat$weight>0], na.rm = TRUE)
-    sdat$adj_weight <- sdat$weight
-    sdat$adj_weight[sdat$adj_weight == 0] <- min_weight/2
-
-    # fit for each year
-    gs <- lapply(years,
-                 function(yrs) {
-                   # check if there is enough data?
-                   # or wrap in a try to get it going:
-                   # set the smoothing to be related to the number of statsquares in the survey area
-                   k <- max(3, min(20, floor(nrow(statrec_pred) / 5)))
-                   try(
-                     gam(log(adj_weight) ~ s(fStatRec, bs = "mrf", xt = list(penalty = Q), k = k),
-                         data = subset(data.frame(sdat), Year == yrs),
-                         drop.unused.levels = FALSE)
-                   )
-                 })
-    names(gs) <- paste(years)
-
-    save(gs,
-         file = paste0("species/", species[i], "/intermediate_data/", stab$Survey.name[j], "_", stab$Quarter[j],"_gams.rData"))
-  }
 }
 
