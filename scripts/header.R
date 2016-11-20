@@ -9,10 +9,21 @@
 library(icesDatras)
 library(icesVocab)
 
+# workflow
+library(purrr)
+library(tidyr)
+library(magrittr)
+library(dplyr)
+
+# database
+library(DBI)
+library(RSQLite)
+
 # for modelling
 library(mgcv, quietly = TRUE)
 library(gmrf, quietly = TRUE)
 library(Matrix, quietly = TRUE)
+library(lubridate, quietly = TRUE)
 
 # spatial stuff
 library(rgdal, quietly = TRUE)

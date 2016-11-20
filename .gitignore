@@ -10,7 +10,17 @@ species/*
 shapefiles/*
 zips/*
 datras/*
+figure/*
 figures/*
+
 
 # ingore some files
 scripts/worksheet.R
+input/hh.csv
+input/hh_with_weight.csv
+input/spatial_model_data.rData
+*.sqlite
+input/cpue_lwr.rdata
+input/fitted_surfaces.rdata
+input/simulated_cpue.rdata
+*.pdf
