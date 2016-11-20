@@ -23,3 +23,4 @@ input/spatial_model_data.rData
 input/cpue_lwr.rdata
 input/fitted_surfaces.rdata
 input/simulated_cpue.rdata
+*.pdf
