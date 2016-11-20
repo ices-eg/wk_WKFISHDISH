@@ -7,11 +7,6 @@
 # load packages etc.
 source("scripts/header.R")
 
-
-source("scripts/lwr_utils.R")
-
-force.fit <- FALSE
-
 # read design table and look at species
 fulltab <- getControlTable()
 species <- unique(fulltab$Species)
@@ -35,16 +30,13 @@ dbDisconnect(con)
 
 # create data.frame for results
 data <- tibble(species = unique(fulltab$Species))
-
-#data <- data[1:2,]
 data %<>% mutate(Aphia = map(species, getAphia),
                  Model = map2(Aphia, species, fit_lwr),
                  cpue = map2(Model, Aphia, predict_cpue))
 
 # some checks
-map(data$Model, summary)
-map(data$Model, function(x) capture.output(gam.check(x)))
-
+#map(data$Model, summary)
+#map(data$Model, function(x) capture.output(gam.check(x)))
 
 # join together hh_weights
 cpue <- unnest(data, cpue)

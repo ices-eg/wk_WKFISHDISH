@@ -1,26 +1,24 @@
 # -------------------------------------
 #
-# Fit density surface for each species
+# Fit density surface for each species and survey
 #
 # -------------------------------------
 
 
 # load packages etc.
 source("scripts/header.R")
-source("scripts/fit_surface_utils.R")
 
 # read in spatial datasets
 load("input/spatial_model_data.rData")
 statrec$fStatRec <- factor(statrec$StatRec)
 
-# Get HH data:
+# Get HH and cpue data:
 con <- dbConnect(SQLite(), dbname = "db/datras.sqlite")
 hh <- dbReadTable(con, "hh")
+data <- dbReadTable(con, "cpue")
 dbDisconnect(con)
 
-# join onto cpue data
-load("input/cpue_lwr.rdata")
-data %<>% unnest(cpue)
+# join hh onto cpue data
 data %<>% left_join(hh)
 
 # create data.frame for model fits
