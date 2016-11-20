@@ -29,7 +29,7 @@ getAphia <- function(sp) {
 
 
 # Get HH data:
-con <- dbConnect(RSQLite::SQLite(), dbname = "db/datras.sqlite")
+con <- dbConnect(SQLite(), dbname = "db/datras.sqlite")
 hh <- dbReadTable(con,"hh")
 dbDisconnect(con)
 
@@ -54,7 +54,7 @@ dbWriteTable(con, "cpue", cpue, append = FALSE, overwrite = TRUE)
 dbDisconnect(con)
 
 # save data
-save(data, file = "output/cpue_lwr.rdata")
+save(data, file = "input/cpue_lwr.rdata")
 
 
 

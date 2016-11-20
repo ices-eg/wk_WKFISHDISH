@@ -14,7 +14,10 @@ library(purrr)
 library(tidyr)
 library(magrittr)
 library(dplyr)
+
+# database
 library(DBI)
+library(RSQLite)
 
 # for modelling
 library(mgcv, quietly = TRUE)

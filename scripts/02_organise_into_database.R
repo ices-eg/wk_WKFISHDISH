@@ -8,12 +8,10 @@
 source("scripts/header.R")
 
 
-library(DBI)
-library(RSQLite)
 # Create an ephemeral in-memory RSQLite database
 if (!dir.exists("db")) dir.create("db")
 unlink("db/datras.sqlite")
-con <- dbConnect(RSQLite::SQLite(), dbname = "db/datras.sqlite", flags = SQLITE_RWC)
+con <- dbConnect(SQLite(), dbname = "db/datras.sqlite", flags = SQLITE_RWC)
 
 dbListTables(con)
 

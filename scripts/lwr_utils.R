@@ -1,6 +1,6 @@
 
 fit_lwr <- function(aphia, species) {
-  con <- dbConnect(RSQLite::SQLite(), dbname = "db/datras.sqlite")
+  con <- dbConnect(SQLite(), dbname = "db/datras.sqlite")
 
   # Get CA data:
   sqlstring <-
@@ -67,7 +67,7 @@ fit_lwr <- function(aphia, species) {
 predict_cpue <- function(model, aphia) {
 
   # Get HL data:
-  con <- dbConnect(RSQLite::SQLite(), dbname = "db/datras.sqlite")
+  con <- dbConnect(SQLite(), dbname = "db/datras.sqlite")
   sqlstring <-
     paste0("SELECT * \n",
            "FROM hl\n",
