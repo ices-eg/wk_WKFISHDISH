@@ -7,13 +7,61 @@
 
 # load packages etc.
 source("scripts/header.R")
-
-# read design table and look at species
-fulltab <- getControlTable()
-species <- unique(fulltab$Species)
+source("scripts/fit_surface_utils.R")
 
 # read in spatial datasets
 load("input/spatial_model_data.rData")
+statrec$fStatRec <- factor(statrec$StatRec)
+
+# Get HH data:
+con <- dbConnect(SQLite(), dbname = "db/datras.sqlite")
+hh <- dbReadTable(con, "hh")
+dbDisconnect(con)
+
+# join onto cpue data
+load("input/cpue_lwr.rdata")
+data %<>% unnest(cpue)
+data %<>% left_join(hh)
+
+# create data.frame for model fits
+data <- nest(data, -species, -Survey, -Quarter, -Year, .key = Data)
+
+# for each row fit a surface
+data %<>% mutate(Model = map(Data, fit_surface))
+
+# save data
+save(data, file = "input/fitted_surfaces.rdata")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # subset to > 2001
 dat <- dat[dat$Year > 2001,]
