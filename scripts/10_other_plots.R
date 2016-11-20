@@ -7,13 +7,8 @@
 # load packages etc.
 source("scripts/header.R")
 
-# read design table and look at species
-fulltab <- getControlTable()
-areas <- unique(fulltab$Division)
-
 # read in spatial datasets
-load("input/spatial_data.rData")
-
+load("input/spatial_model_data.rData")
 
 #plot
 png("figures/TAC_units.png",
@@ -25,6 +20,38 @@ png("figures/TAC_units.png",
   text(sp::coordinates(area),
        labels = area$SubAreaDiv,
        cex = 0.45, font = 2)
+dev.off()
+
+
+#plot
+png("figures/spatial_smoother_structure.png",
+    width = 7, height = 7, units = "in", pointsize = 8,
+    bg = "white", res = 600,
+    type = "cairo-png")
+  # plot regions with names
+  plot(area, col = gplots::rich.colors(nrow(area), alpha = 0.5), border = grey(0.4))
+
+  plot(statrec, col = grey(0.5, alpha = 0.5), add = TRUE)
+  xy <- coordinates(statrec)
+  nbs <- cbind(rep(1:length(adj), sapply(adj, length)), unlist(adj))
+  nbs <- unique(t(apply(nbs, 1, sort)))
+  segments(xy[nbs[,1],1], xy[nbs[,1],2],
+           xy[nbs[,2],1], xy[nbs[,2],2],
+           col = "blue")
+  points(xy, pch = 16, col = "red", cex = 0.4)
+dev.off()
+
+
+
+#plot
+pdf("figures/data_covarage.pdf", paper = "a4", onefile = TRUE)
+
+par(mfrow=c(2,2), mar = c(0,0,1,0))
+for (yr in sort(unique(dat$Year))) {
+  plot(statrec, main = yr, border = grey(0.5, alpha = 0.5))
+  points(dat[dat$Year == yr,], cex=0.5)
+}
+
 dev.off()
 
 
