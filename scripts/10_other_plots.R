@@ -43,6 +43,18 @@ dev.off()
 
 
 
+#plot
+pdf("figures/data_covarage.pdf", paper = "a4", onefile = TRUE)
+
+par(mfrow=c(2,2), mar = c(0,0,1,0))
+for (yr in sort(unique(dat$Year))) {
+  plot(statrec, main = yr, border = grey(0.5, alpha = 0.5))
+  points(dat[dat$Year == yr,], cex=0.5)
+}
+
+dev.off()
+
+
 
 
 
