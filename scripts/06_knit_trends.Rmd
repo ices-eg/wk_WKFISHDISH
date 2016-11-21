@@ -51,6 +51,7 @@ plot_result <- function(res, main = "") {
 
 ![](../figures/spatial_smoother_structure.png)
 
+\pagebreak
 ## Megrim
 
 ```{r megrim, results="asis", echo=FALSE}
@@ -63,6 +64,7 @@ knitr::kable(res, digits = 3)
 plot_result(res, main = "Megrim")
 ```
 
+\pagebreak
 ## Plaice
 
 ```{r Plaice, results="asis", echo=FALSE}
@@ -76,6 +78,7 @@ plot_result(res, main = "Plaice")
 ```
 
 
+\pagebreak
 ## Sole
 
 ```{r Sole, results="asis", echo=FALSE}
@@ -88,6 +91,7 @@ knitr::kable(res, digits = 3)
 plot_result(res, main = "Sole")
 ```
 
+\pagebreak
 ## Anchovy
 
 ```{r Anchovy, results="asis", echo=FALSE}
@@ -100,6 +104,7 @@ knitr::kable(res, digits = 3)
 plot_result(res, main = "Anchovy")
 ```
 
+\pagebreak
 ## Anglerfish
 
 ```{r Anglerfish, results="asis", echo=FALSE}
@@ -112,6 +117,7 @@ knitr::kable(res, digits = 3)
 plot_result(res, main = "Anglerfish")
 ```
 
+\pagebreak
 ## Blue Whiting
 
 ```{r Blue_Whiting, results="asis", echo=FALSE}
@@ -124,6 +130,7 @@ knitr::kable(res, digits = 3)
 plot_result(res, main = "Blue Whiting")
 ```
 
+\pagebreak
 ## Cod
 
 ```{r Cod, results="asis", echo=FALSE}
@@ -136,6 +143,7 @@ knitr::kable(res, digits = 3)
 plot_result(res, main = "Cod")
 ```
 
+\pagebreak
 ## Haddock
 
 ```{r Haddock, results="asis", echo=FALSE}
@@ -149,6 +157,7 @@ plot_result(res, main = "Haddock")
 ```
 
 
+\pagebreak
 ## Hake
 
 ```{r Hake, results="asis", echo=FALSE}
@@ -161,6 +170,7 @@ knitr::kable(res, digits = 3)
 plot_result(res, main = "Hake")
 ```
 
+\pagebreak
 ## Herring
 
 ```{r Herring, results="asis", echo=FALSE}
@@ -173,6 +183,7 @@ knitr::kable(res, digits = 3)
 plot_result(res, main = "Herring")
 ```
 
+\pagebreak
 ## Horse Mackerel
 
 ```{r Horse_Mackerel, results="asis", echo=FALSE}
@@ -185,6 +196,7 @@ knitr::kable(res, digits = 3)
 plot_result(res, main = "Horse Mackerel")
 ```
 
+\pagebreak
 ## Mackerel
 
 ```{r Mackerel, results="asis", echo=FALSE}
@@ -197,6 +209,7 @@ knitr::kable(res, digits = 3)
 plot_result(res, main = "Mackerel")
 ```
 
+\pagebreak
 ## Norway Pout
 
 ```{r Norway_Pout, results="asis", echo=FALSE}
@@ -209,6 +222,7 @@ knitr::kable(res, digits = 3)
 plot_result(res, main = "Norway Pout")
 ```
 
+\pagebreak
 ## Pollack
 
 ```{r Pollack, results="asis", echo=FALSE}
@@ -221,6 +235,7 @@ knitr::kable(res, digits = 3)
 plot_result(res, main = "Pollack")
 ```
 
+\pagebreak
 ## Saithe
 
 ```{r Saithe, results="asis", echo=FALSE}
@@ -233,6 +248,7 @@ knitr::kable(res, digits = 3)
 plot_result(res, main = "Saithe")
 ```
 
+\pagebreak
 ## Spurdog
 
 ```{r Spurdog, results="asis", echo=FALSE}
@@ -245,6 +261,7 @@ knitr::kable(res, digits = 3)
 plot_result(res, main = "Spurdog")
 ```
 
+\pagebreak
 ## Sprat
 
 ```{r Sprat, results="asis", echo=FALSE}
@@ -257,6 +274,7 @@ knitr::kable(res, digits = 3)
 plot_result(res, main = "Sprat")
 ```
 
+\pagebreak
 ## Whiting
 
 ```{r Whiting, results="asis", echo=FALSE}
