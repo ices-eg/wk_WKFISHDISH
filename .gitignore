@@ -24,3 +24,5 @@ input/cpue_lwr.rdata
 input/fitted_surfaces.rdata
 input/simulated_cpue.rdata
 *.pdf
+scripts/06_knit_trends_cache/*
+scripts/06_knit_trends_files/*

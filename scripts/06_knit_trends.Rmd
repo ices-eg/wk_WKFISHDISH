@@ -4,10 +4,9 @@ output: word_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, cache = TRUE)
 knitr::opts_knit$set(root.dir = normalizePath('../'))
 ```
-
 
 ```{r load, include=FALSE, message=FALSE}
 # load packages etc.
@@ -42,15 +41,17 @@ plot_result <- function(res, main = "") {
 }
 ```
 
-
 ## TAC units
 
 ![](../figures/TAC_units_cropped.png)
+
+Figure 1. A figure showing the size and location of the TAC units under consideration.  Each unit is uniquely coloured to distinguish it and the name of each unit is shown in its centre.
 
 ## Data coverage
 
 ![](../figures/spatial_smoother_structure.png)
 
+Figure 2. Overlayed on the TAC units is the spatial extent considered for the assessment of changes in distribution between stock areas.  For example, Division 8.d is represented by 3 statistical rectangles traversing the shelf edge, and 7.k is represented by 9 statistical rectangles in the north eastern corner covering approximately 25\% of the area defined by 7.k. Other regions are more completley covered, such as, 4.a and 4.b. 
 
 ## Megrim
 
