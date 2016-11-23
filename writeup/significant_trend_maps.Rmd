@@ -231,3 +231,25 @@ if (nrow(res)>0) {
 }
 ```
 
+## Anglerfish
+
+```{r Anglerfish_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
+load('output/Anglerfish_trends.rData')
+res$p_adj <- p.adjust(res$median_p, method = 'BH')
+res %<>% filter(p_adj < 0.05) %>% select(-p)
+if (nrow(res)>0) {
+  plot_result(res, main = 'Anglerfish')
+}
+```
+
+## Norway Pout
+
+```{r Norway Pout_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
+load('output/Norway Pout_trends.rData')
+res$p_adj <- p.adjust(res$median_p, method = 'BH')
+res %<>% filter(p_adj < 0.05) %>% select(-p)
+if (nrow(res)>0) {
+  plot_result(res, main = 'Norway Pout')
+}
+```
+

@@ -207,3 +207,27 @@ if (nrow(res)>0) {
 ```
 
 
+## Anglerfish
+
+```{r Anglerfish, results='asis', echo=FALSE}
+load('output/Anglerfish_trends.rData')
+res$p_adj <- p.adjust(res$median_p, method = 'BH')
+res %<>% filter(p_adj < 0.05) %>% select(-p)
+if (nrow(res)>0) {
+  knitr::kable(res, digits = 3)
+}
+```
+
+
+## Norway Pout
+
+```{r Norway Pout, results='asis', echo=FALSE}
+load('output/Norway Pout_trends.rData')
+res$p_adj <- p.adjust(res$median_p, method = 'BH')
+res %<>% filter(p_adj < 0.05) %>% select(-p)
+if (nrow(res)>0) {
+  knitr::kable(res, digits = 3)
+}
+```
+
+

@@ -22,7 +22,7 @@ cgspecies_plots <- function(sp) {
   gsub("%s", sp,
 "## %s
 
-```{r %s_plot, dpi=600, fig.width=7, fig.height=6, echo=FALSE}
+```{r %s_plot, dpi=400, fig.width=7, fig.height=6, echo=FALSE}
 load(paste0('output/%s_centre_gravity.rData'))
 
 # plot
@@ -78,22 +78,23 @@ print(p)
 }
 
 species <- c("Spurdog", "Herring", "Sprat", "Anchovy", "Cod", "Haddock", "Whiting", "Blue Whiting",
-             "Pollack", "Saithe", "Hake", "Horse Mackerel", "Mackerel", "Megrim", "Plaice", "Sole")
+             "Pollack", "Saithe", "Hake", "Horse Mackerel", "Mackerel", "Megrim", "Plaice", "Sole",
+             "Anglerfish", "Norway Pout")
 
 plots <- sapply(species, species_plots)
 tables <- sapply(species, species_tables)
 ratio_plots <- sapply(species, log_ratio_plots)
 cg_plots <- sapply(species, cgspecies_plots)
 
-cat(file = "writeup/knit_plots.Rmd",
+cat(file = "writeup/significant_trend_maps.Rmd",
     readLines("writeup/plots_template.Rmd"),
     plots, sep = "\n")
 
-cat(file = "writeup/knit_tables.Rmd",
+cat(file = "writeup/significant_tables.Rmd",
     readLines("writeup/tables_template.Rmd"),
     tables, sep = "\n")
 
-cat(file = "writeup/knit_ratio_plots.Rmd",
+cat(file = "writeup/significant_log_ratio_plots.Rmd",
     readLines("writeup/tables_template.Rmd"),
     ratio_plots, sep = "\n")
 

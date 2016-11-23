@@ -367,3 +367,47 @@ print(p)
 ```
 
 
+## Anglerfish
+
+```{r Anglerfish, dpi=300, fig.width=8, fig.height=7, echo=FALSE, message=FALSE}
+load('output/Anglerfish_trends.rData')
+res$p_adj <- p.adjust(res$median_p, method = 'BH')
+res %<>% filter(p_adj < 0.05) %>% select(-p)
+
+# plot log ratios
+tmp <- unnest(stocks, data)
+tmp <- left_join(res, tmp)
+if (nrow(res)>0) {
+p <- xyplot(val ~ Year | paste0(Division1, ' ~ ', Division2, ' (', round(slope,2), ')'), groups = id,
+       data = subset(tmp, id %in% 1:100),
+       type = c('p', 'r'), col = grey(0.5, alpha = 0.3), pch = 16,
+       scale = list(y = list(relation = 'free')),
+      main = 'Anglerfish',
+      layout = c(4, 2), as.table = TRUE)
+print(p)
+}
+```
+
+
+## Norway Pout
+
+```{r Norway Pout, dpi=300, fig.width=8, fig.height=7, echo=FALSE, message=FALSE}
+load('output/Norway Pout_trends.rData')
+res$p_adj <- p.adjust(res$median_p, method = 'BH')
+res %<>% filter(p_adj < 0.05) %>% select(-p)
+
+# plot log ratios
+tmp <- unnest(stocks, data)
+tmp <- left_join(res, tmp)
+if (nrow(res)>0) {
+p <- xyplot(val ~ Year | paste0(Division1, ' ~ ', Division2, ' (', round(slope,2), ')'), groups = id,
+       data = subset(tmp, id %in% 1:100),
+       type = c('p', 'r'), col = grey(0.5, alpha = 0.3), pch = 16,
+       scale = list(y = list(relation = 'free')),
+      main = 'Norway Pout',
+      layout = c(4, 2), as.table = TRUE)
+print(p)
+}
+```
+
+
