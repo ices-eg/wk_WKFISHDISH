@@ -6,35 +6,15 @@
 
 source("scripts/header.R")
 
-if (!dir.exists("output")) dir.create("output")
+
+# read in spatial datasets
+load("input/spatial_model_data.rData")
 
 for (selected.species in unique(getControlTable()$Species)) {
   # select a species
 
-  # read in spatial datasets
-  load("input/spatial_model_data.rData")
-  statrec$fStatRec <- factor(statrec$StatRec)
-
-  # Get HH and cpue data:
-  con <- dbConnect(SQLite(), dbname = "db/datras.sqlite")
-  hh <- dbReadTable(con, "hh")
-  data <- dbReadTable(con, "cpue")
-  dbDisconnect(con)
-
-  # join hh onto cpue data
-  data %<>% as_data_frame() %>%
-    left_join(hh)
-
-  # create data.frame for model fits
-  data <- nest(data, -species, -Survey, -Quarter, -Year, .key = Data)
-
-
-  # for each row fit a surface
-  data %<>% filter(species == selected.species, Year > 1995)
-  data %<>% mutate(Model = map(Data, fit_surface))
-
-  # simulate
-  data %<>% mutate(Sims = map(Model, sim_cpue))
+  sim_fname <- paste0("output/", selected.species, "_sims.rData")
+  load(sim_fname)
 
   # join on divisions
   fulldata <- getControlTable() %>%
@@ -46,20 +26,9 @@ for (selected.species in unique(getControlTable()$Species)) {
     left_join(fulldata) %>%
     filter(!is.na(Division))
 
-  # drop sims
+  # drop unused sims
   data %<>% mutate(Sim = map2(Sims, Division, function(x, div) x[,div])) %>%
     select(-Sims, -Model)
-
-  # read design table and look at species
-  fulltab <- getControlTable()
-  species <- unique(fulltab$Species)
-
-  # find adjacency of areas
-  adj <- spdep::poly2nb(area, queen = FALSE)
-  nbs <- cbind(rep(1:length(adj), sapply(adj, length)), unlist(adj))
-  nbs <- unique(t(apply(nbs, 1, sort)))
-  # drop 7a-7b connection
-  nbs <- nbs[!(area$SubAreaDiv[nbs[,1]] == "7.a" & area$SubAreaDiv[nbs[,2]] == "7.b"),]
 
   # only consider comparisons between adjacent regions
   stocks <- tibble(Division  = area$SubAreaDiv[nbs[,1]],
@@ -87,17 +56,23 @@ for (selected.species in unique(getControlTable()$Species)) {
   test <- function(x) {
     test_by <- function(x) {
       y <- x$val[order(x$Year)]
-      out <- try(Kendall::MannKendall(y)$tau, silent = TRUE)
-      if (inherits(out, "try-error")) out <- NA
-      attributes(out) <- NULL
-      tibble(slope = out)
+      out <- try(Kendall::MannKendall(y), silent = TRUE)
+      #out <- try(coef(lm(val ~ Year, data = x))[2])
+      if (inherits(out, "try-error")) out <- list(sl=NA, tau = NA)
+      tibble(kendall_p = out$sl,
+             slope = out$tau,
+             start_year = min(x$Year),
+             end_year = max(x$Year))
     }
 
     x %>% group_by(id) %>%
       do(test_by(.)) %>%
       ungroup() %>%
-      summarise(p = 2*min(sum(slope>0), sum(slope<0))/(length(slope)+1),
-                slope = median(slope))
+      summarise(p = (1+sum(kendall_p>0.05))/(length(kendall_p)+1),
+                median_p = median(kendall_p),
+                slope = median(slope),
+                start_year = min(start_year),
+                end_year = min(end_year))
   }
 
   res <- stocks %>% mutate(test = map(data, test)) %>%
@@ -108,5 +83,7 @@ for (selected.species in unique(getControlTable()$Species)) {
   # correct for false discovery - do this by species?
   res$p_adj <- p.adjust(res$p, method = "BH")
 
-  save(res, file = paste0("output/", selected.species, "_trends.rData"))
+  res %>% filter(p_adj < 0.05) %>% select(-p)
+
+  save(res, stocks, file = paste0("output/", selected.species, "_trends.rData"))
 }

@@ -11,7 +11,9 @@ source("scripts/header.R")
 load("input/spatial_data.rData")
 
 # load data
-dat <- read.csv(paste0("input/hh_with_weight.csv"))
+con <- dbConnect(SQLite(), dbname = "db/datras.sqlite")
+dat <- dbReadTable(con, "hh")
+dbDisconnect(con)
 
 # remove NAs - why are there NAs...
 dat <- dat[complete.cases(dat),]
@@ -59,7 +61,16 @@ diag(Q) <- rowSums(adjmat)
 Q <- as.matrix(Q)
 colnames(Q) <- rownames(Q) <- statrec$ICESNAME
 statrec$StatRec <- statrec$ICESNAME
+statrec$fStatRec <- factor(statrec$StatRec)
 
-save(area, statrec, adj, dat, Q,
+# find adjacency of areas
+area_adj <- spdep::poly2nb(area, queen = FALSE)
+nbs <- cbind(rep(1:length(area_adj), sapply(area_adj, length)), unlist(area_adj))
+nbs <- unique(t(apply(nbs, 1, sort)))
+# drop 7a-7b connection
+nbs <- nbs[!(area$SubAreaDiv[nbs[,1]] == "7.a" & area$SubAreaDiv[nbs[,2]] == "7.b"),]
+
+
+save(area, statrec, adj, area_adj, nbs, dat, Q,
      file = paste0("input/spatial_model_data.rData"))
 

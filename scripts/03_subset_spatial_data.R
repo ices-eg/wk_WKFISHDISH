@@ -34,10 +34,10 @@ tmpdat <- data.frame(SubAreaDiv = sapply(tmpsp@polygons, function(x) x@ID))
 rownames(tmpdat) <- tmpdat$SubAreaDiv
 area <- SpatialPolygonsDataFrame(tmpsp, tmpdat)
 
-
 # save modified shapefiles
 writeOGR(statrec, "shapefiles", "ICES_StatRec_WKFISHDISH", driver="ESRI Shapefile", overwrite_layer=TRUE)
 writeOGR(area, "shapefiles", "ICES_Areas_WKFISHDISH", driver="ESRI Shapefile", overwrite_layer=TRUE)
+
 
 # save as R objects
 save(statrec, area, file = "input/spatial_data.rData")
