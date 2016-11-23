@@ -5,7 +5,6 @@
 *.Rproj
 
 # ignore some folders
-writeup/*
 species/*
 shapefiles/*
 zips/*
@@ -27,3 +26,5 @@ input/simulated_cpue.rdata
 *.pdf
 scripts/06_knit_trends_cache/*
 scripts/06_knit_trends_files/*
+*.docx
+writeup/Significancetests presence-absence_V2.xlsx

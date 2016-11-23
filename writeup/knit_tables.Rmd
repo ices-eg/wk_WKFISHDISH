@@ -1,0 +1,209 @@
+---
+  title: "Distribution shifts - Tables"
+  output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = normalizePath('../'))
+```
+
+```{r load, include=FALSE, message=FALSE}
+# load packages etc.
+source("scripts/header.R")
+load("input/spatial_model_data.rData")
+```
+
+# Tables
+## Spurdog
+
+```{r Spurdog, results='asis', echo=FALSE}
+load('output/Spurdog_trends.rData')
+res$p_adj <- p.adjust(res$median_p, method = 'BH')
+res %<>% filter(p_adj < 0.05) %>% select(-p)
+if (nrow(res)>0) {
+  knitr::kable(res, digits = 3)
+}
+```
+
+
+## Herring
+
+```{r Herring, results='asis', echo=FALSE}
+load('output/Herring_trends.rData')
+res$p_adj <- p.adjust(res$median_p, method = 'BH')
+res %<>% filter(p_adj < 0.05) %>% select(-p)
+if (nrow(res)>0) {
+  knitr::kable(res, digits = 3)
+}
+```
+
+
+## Sprat
+
+```{r Sprat, results='asis', echo=FALSE}
+load('output/Sprat_trends.rData')
+res$p_adj <- p.adjust(res$median_p, method = 'BH')
+res %<>% filter(p_adj < 0.05) %>% select(-p)
+if (nrow(res)>0) {
+  knitr::kable(res, digits = 3)
+}
+```
+
+
+## Anchovy
+
+```{r Anchovy, results='asis', echo=FALSE}
+load('output/Anchovy_trends.rData')
+res$p_adj <- p.adjust(res$median_p, method = 'BH')
+res %<>% filter(p_adj < 0.05) %>% select(-p)
+if (nrow(res)>0) {
+  knitr::kable(res, digits = 3)
+}
+```
+
+
+## Cod
+
+```{r Cod, results='asis', echo=FALSE}
+load('output/Cod_trends.rData')
+res$p_adj <- p.adjust(res$median_p, method = 'BH')
+res %<>% filter(p_adj < 0.05) %>% select(-p)
+if (nrow(res)>0) {
+  knitr::kable(res, digits = 3)
+}
+```
+
+
+## Haddock
+
+```{r Haddock, results='asis', echo=FALSE}
+load('output/Haddock_trends.rData')
+res$p_adj <- p.adjust(res$median_p, method = 'BH')
+res %<>% filter(p_adj < 0.05) %>% select(-p)
+if (nrow(res)>0) {
+  knitr::kable(res, digits = 3)
+}
+```
+
+
+## Whiting
+
+```{r Whiting, results='asis', echo=FALSE}
+load('output/Whiting_trends.rData')
+res$p_adj <- p.adjust(res$median_p, method = 'BH')
+res %<>% filter(p_adj < 0.05) %>% select(-p)
+if (nrow(res)>0) {
+  knitr::kable(res, digits = 3)
+}
+```
+
+
+## Blue Whiting
+
+```{r Blue Whiting, results='asis', echo=FALSE}
+load('output/Blue Whiting_trends.rData')
+res$p_adj <- p.adjust(res$median_p, method = 'BH')
+res %<>% filter(p_adj < 0.05) %>% select(-p)
+if (nrow(res)>0) {
+  knitr::kable(res, digits = 3)
+}
+```
+
+
+## Pollack
+
+```{r Pollack, results='asis', echo=FALSE}
+load('output/Pollack_trends.rData')
+res$p_adj <- p.adjust(res$median_p, method = 'BH')
+res %<>% filter(p_adj < 0.05) %>% select(-p)
+if (nrow(res)>0) {
+  knitr::kable(res, digits = 3)
+}
+```
+
+
+## Saithe
+
+```{r Saithe, results='asis', echo=FALSE}
+load('output/Saithe_trends.rData')
+res$p_adj <- p.adjust(res$median_p, method = 'BH')
+res %<>% filter(p_adj < 0.05) %>% select(-p)
+if (nrow(res)>0) {
+  knitr::kable(res, digits = 3)
+}
+```
+
+
+## Hake
+
+```{r Hake, results='asis', echo=FALSE}
+load('output/Hake_trends.rData')
+res$p_adj <- p.adjust(res$median_p, method = 'BH')
+res %<>% filter(p_adj < 0.05) %>% select(-p)
+if (nrow(res)>0) {
+  knitr::kable(res, digits = 3)
+}
+```
+
+
+## Horse Mackerel
+
+```{r Horse Mackerel, results='asis', echo=FALSE}
+load('output/Horse Mackerel_trends.rData')
+res$p_adj <- p.adjust(res$median_p, method = 'BH')
+res %<>% filter(p_adj < 0.05) %>% select(-p)
+if (nrow(res)>0) {
+  knitr::kable(res, digits = 3)
+}
+```
+
+
+## Mackerel
+
+```{r Mackerel, results='asis', echo=FALSE}
+load('output/Mackerel_trends.rData')
+res$p_adj <- p.adjust(res$median_p, method = 'BH')
+res %<>% filter(p_adj < 0.05) %>% select(-p)
+if (nrow(res)>0) {
+  knitr::kable(res, digits = 3)
+}
+```
+
+
+## Megrim
+
+```{r Megrim, results='asis', echo=FALSE}
+load('output/Megrim_trends.rData')
+res$p_adj <- p.adjust(res$median_p, method = 'BH')
+res %<>% filter(p_adj < 0.05) %>% select(-p)
+if (nrow(res)>0) {
+  knitr::kable(res, digits = 3)
+}
+```
+
+
+## Plaice
+
+```{r Plaice, results='asis', echo=FALSE}
+load('output/Plaice_trends.rData')
+res$p_adj <- p.adjust(res$median_p, method = 'BH')
+res %<>% filter(p_adj < 0.05) %>% select(-p)
+if (nrow(res)>0) {
+  knitr::kable(res, digits = 3)
+}
+```
+
+
+## Sole
+
+```{r Sole, results='asis', echo=FALSE}
+load('output/Sole_trends.rData')
+res$p_adj <- p.adjust(res$median_p, method = 'BH')
+res %<>% filter(p_adj < 0.05) %>% select(-p)
+if (nrow(res)>0) {
+  knitr::kable(res, digits = 3)
+}
+```
+
+

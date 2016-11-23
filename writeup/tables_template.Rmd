@@ -1,0 +1,17 @@
+---
+  title: "Distribution shifts - Tables"
+  output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = normalizePath('../'))
+```
+
+```{r load, include=FALSE, message=FALSE}
+# load packages etc.
+source("scripts/header.R")
+load("input/spatial_model_data.rData")
+```
+
+# Tables
