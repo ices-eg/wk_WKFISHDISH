@@ -1,0 +1,213 @@
+---
+  title: "Centre of Gravity"
+  output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = normalizePath('../'))
+```
+
+```{r load, include=FALSE, message=FALSE}
+# load packages etc.
+source("scripts/header.R")
+load("input/spatial_model_data.rData")
+```
+
+```{r functions, include=FALSE}
+# plot result
+plot.report <- function(df) {
+
+  if (nrow(df$data[[1]]) < 3) return(NULL)
+
+  layout(matrix(c(1,1,2,3), 2, 2, byrow = TRUE), heights = c(1.5,1))
+
+  plot(df$statrec[[1]], main = paste0(df$Survey, " Q", df$Quarter), border = grey(0.5, alpha=0.5))
+  plot(area, border = grey(0.7, alpha=0.5), add = TRUE)
+  pdat <- df %>% unnest(data) %>% unnest(cg, cg_ci)
+  lines(pdat$y, pdat$x)
+  years <- pdat$Year - min(pdat$Year) + 1
+  nyears <- max(years)
+  cols <- colorRampPalette(c("cyan", "magenta"))(nyears)
+  points(pdat$y, pdat$x, col = cols[years], pch = 16)
+
+  plot(pdat$Year, pdat$x, type = "l", ylim = range(pdat$x, pdat$x.ciu, pdat$x.cil),
+       axes = FALSE, ylab = "Latitude", xlab = "Year")
+  points(pdat$Year, pdat$x)
+  lines(pdat$Year, pdat$x.cil, lty = 2)
+  lines(pdat$Year, pdat$x.ciu, lty = 2)
+  axis(1); axis(2, las = 1); box(bty="l")
+
+  plot(pdat$Year, pdat$y, type = "l", ylim = range(pdat$y, pdat$y.ciu, pdat$y.cil),
+       axes = FALSE, ylab = "Longitude", xlab = "Year")
+  points(pdat$Year, pdat$y)
+  lines(pdat$Year, pdat$y.cil, lty = 2)
+  lines(pdat$Year, pdat$y.ciu, lty = 2)
+  axis(1); axis(2, las = 1); box(bty="l")
+
+}
+```
+
+
+
+
+## Spurdog
+
+```{r Spurdog_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
+load(paste0('output/', selected.species, '_centre_gravity.rData'))
+
+# plot
+sapply(1:nrow(data), function(i) plot.report(data[i,]))
+```
+
+
+## Herring
+
+```{r Herring_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
+load(paste0('output/', selected.species, '_centre_gravity.rData'))
+
+# plot
+sapply(1:nrow(data), function(i) plot.report(data[i,]))
+```
+
+
+## Sprat
+
+```{r Sprat_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
+load(paste0('output/', selected.species, '_centre_gravity.rData'))
+
+# plot
+sapply(1:nrow(data), function(i) plot.report(data[i,]))
+```
+
+
+## Anchovy
+
+```{r Anchovy_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
+load(paste0('output/', selected.species, '_centre_gravity.rData'))
+
+# plot
+sapply(1:nrow(data), function(i) plot.report(data[i,]))
+```
+
+
+## Cod
+
+```{r Cod_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
+load(paste0('output/', selected.species, '_centre_gravity.rData'))
+
+# plot
+sapply(1:nrow(data), function(i) plot.report(data[i,]))
+```
+
+
+## Haddock
+
+```{r Haddock_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
+load(paste0('output/', selected.species, '_centre_gravity.rData'))
+
+# plot
+sapply(1:nrow(data), function(i) plot.report(data[i,]))
+```
+
+
+## Whiting
+
+```{r Whiting_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
+load(paste0('output/', selected.species, '_centre_gravity.rData'))
+
+# plot
+sapply(1:nrow(data), function(i) plot.report(data[i,]))
+```
+
+
+## Blue Whiting
+
+```{r Blue Whiting_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
+load(paste0('output/', selected.species, '_centre_gravity.rData'))
+
+# plot
+sapply(1:nrow(data), function(i) plot.report(data[i,]))
+```
+
+
+## Pollack
+
+```{r Pollack_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
+load(paste0('output/', selected.species, '_centre_gravity.rData'))
+
+# plot
+sapply(1:nrow(data), function(i) plot.report(data[i,]))
+```
+
+
+## Saithe
+
+```{r Saithe_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
+load(paste0('output/', selected.species, '_centre_gravity.rData'))
+
+# plot
+sapply(1:nrow(data), function(i) plot.report(data[i,]))
+```
+
+
+## Hake
+
+```{r Hake_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
+load(paste0('output/', selected.species, '_centre_gravity.rData'))
+
+# plot
+sapply(1:nrow(data), function(i) plot.report(data[i,]))
+```
+
+
+## Horse Mackerel
+
+```{r Horse Mackerel_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
+load(paste0('output/', selected.species, '_centre_gravity.rData'))
+
+# plot
+sapply(1:nrow(data), function(i) plot.report(data[i,]))
+```
+
+
+## Mackerel
+
+```{r Mackerel_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
+load(paste0('output/', selected.species, '_centre_gravity.rData'))
+
+# plot
+sapply(1:nrow(data), function(i) plot.report(data[i,]))
+```
+
+
+## Megrim
+
+```{r Megrim_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
+load(paste0('output/', selected.species, '_centre_gravity.rData'))
+
+# plot
+sapply(1:nrow(data), function(i) plot.report(data[i,]))
+```
+
+
+## Plaice
+
+```{r Plaice_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
+load(paste0('output/', selected.species, '_centre_gravity.rData'))
+
+# plot
+sapply(1:nrow(data), function(i) plot.report(data[i,]))
+```
+
+
+## Sole
+
+```{r Sole_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
+load(paste0('output/', selected.species, '_centre_gravity.rData'))
+
+# plot
+sapply(1:nrow(data), function(i) plot.report(data[i,]))
+```
+
+

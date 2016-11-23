@@ -16,6 +16,24 @@ if (nrow(res)>0) {
 ")
 }
 
+
+
+cgspecies_plots <- function(sp) {
+  gsub("%s", sp,
+"## %s
+
+```{r %s_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
+load(paste0('output/', selected.species, '_centre_gravity.rData'))
+
+# plot
+sapply(1:nrow(data), function(i) plot.report(data[i,]))
+```
+
+")
+}
+
+
+
 species_tables <- function(sp) {
   gsub("%s", sp,
 "## %s
@@ -65,6 +83,7 @@ species <- c("Spurdog", "Herring", "Sprat", "Anchovy", "Cod", "Haddock", "Whitin
 plots <- sapply(species, species_plots)
 tables <- sapply(species, species_tables)
 ratio_plots <- sapply(species, log_ratio_plots)
+cg_plots <- sapply(species, cgspecies_plots)
 
 cat(file = "writeup/knit_plots.Rmd",
     readLines("writeup/plots_template.Rmd"),
@@ -79,21 +98,28 @@ cat(file = "writeup/knit_ratio_plots.Rmd",
     ratio_plots, sep = "\n")
 
 
+cat(file = "writeup/centre_of_gravity_plots.Rmd",
+    readLines("writeup/cgplots_template.Rmd"),
+    cg_plots, sep = "\n")
+
+
+
+
 # create a table of significant results
-resl <-
-  do.call(rbind,
-  lapply(paste0("output/", dir("output/", pattern = "*_trends.rData")),
-       function(x) {
-         load(x)
-         res$p_adj <- p.adjust(res$median_p, method = 'BH')
-         res %<>% filter(p_adj < 0.05) %>% select(-p)
-         res
-       }))
+#resl <-
+#  do.call(rbind,
+#  lapply(paste0("output/", dir("output/", pattern = "*_trends.rData")),
+#       function(x) {
+#         load(x)
+#         res$p_adj <- p.adjust(res$median_p, method = 'BH')
+#         res %<>% filter(p_adj < 0.05) %>% select(-p)
+#         res
+#       }))
 
-res <-
-  rbind(resl[c("species", "Division1", "slope")],
-      rename(mutate(resl[c("species", "Division2", "slope")], slope=-slope), Division1 = Division2))
+#res <-
+#  rbind(resl[c("species", "Division1", "slope")],
+#      rename(mutate(resl[c("species", "Division2", "slope")], slope=-slope), Division1 = Division2))
 
-with(res, tapply(slope, list(Division1, species), function(x) sum(sign(x))))
+#with(res, tapply(slope, list(Division1, species), function(x) sum(sign(x))))
 
 
