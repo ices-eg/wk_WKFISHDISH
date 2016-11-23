@@ -250,3 +250,60 @@ sim_cpue <- function(mod, nsim = 1000) {
   t(apply(sim, 2, function(x) tapply(x, statrec$SubAreaDiv, mean)))
 }
 
+
+
+# survey data plotting functions -----------------------------
+
+# plot front plot
+front_plot <- function(sstatrec, survey, quarter) {
+  plot(area, xlim = bbox(sstatrec)["x",], ylim = bbox(sstatrec)["y",], col = gplots::rich.colors(nrow(area), alpha = 0.5))
+  plot(statrec, add = TRUE)
+  plot(sstatrec, add = TRUE, col = grey(0.5, alpha = 0.5))
+  mtext(paste0(survey, " Q", quarter), font = 2)
+}
+
+plot_one_survey_data <- function(df) {
+
+  sstatrec <- df$statrec[[1]]
+
+  # set par - starts a new page
+  par(mfrow = c(2,2), mar = c(0,0,1.5,0))
+
+  front_plot(sstatrec, df$Survey, df$Quarter)
+
+  # colours
+  cols <- colorRampPalette(c("cyan", "magenta"))(50)
+
+  # data
+  obs <- df %>%
+    unnest(Data) %>%
+    unnest(Data) %>%
+    by(.$Year,
+       function(x)
+         with(x, tapply(weight,
+                        factor(StatRec, levels = sstatrec$StatRec),
+                        mean,
+                        na.rm = TRUE))) %>%
+    unclass() %>% simplify2array()
+
+  for (k in colnames(obs)) {
+    tmp <- obs[,k]
+    if (all(is.na(tmp))) next
+    if (all(range(tmp, na.rm = TRUE) == c(0,0))) {
+      min <- 0.1; max <- 1
+    } else {
+      min <- min(tmp[which(tmp>0)], na.rm = TRUE)
+      min <- max(min/2, min-0.1)
+      max <- max(tmp[is.finite(tmp)], na.rm = TRUE) + 0.1
+    }
+    breaks <- exp(seq(log(min), log(max), length = 50))
+    tmp[] <- cols[as.numeric(cut.default(tmp, breaks = breaks))]
+    tmp[which(obs[,k] == 0)] <- grey(0.7)
+    tmp[which(obs[,k]>max(breaks))] <- cols[length(cols)]
+
+    plot(statrec, xlim = bbox(sstatrec)["x",], ylim = bbox(sstatrec)["y",])
+    plot(sstatrec, col = tmp, add = TRUE)
+    mtext(paste0(species[i], " ", df$Survey, " Q", df$Quarter, " ", k), font = 2, line = -0.25)
+  }
+}
+
