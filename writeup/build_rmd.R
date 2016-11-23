@@ -22,11 +22,11 @@ cgspecies_plots <- function(sp) {
   gsub("%s", sp,
 "## %s
 
-```{r %s_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
+```{r %s_plot, dpi=600, fig.width=7, fig.height=6, echo=FALSE}
 load(paste0('output/%s_centre_gravity.rData'))
 
 # plot
-sapply(1:nrow(data), function(i) plot.report(data[i,]))
+tmp <- sapply(1:nrow(data), function(i) plot.report(data[i,]))
 ```
 
 ")

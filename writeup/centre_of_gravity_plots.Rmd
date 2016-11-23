@@ -22,8 +22,8 @@ plot.report <- function(df) {
 
   layout(matrix(c(1,1,2,3), 2, 2, byrow = TRUE), heights = c(1.5,1))
 
-  plot(df$statrec[[1]], main = paste0(df$Survey, " Q", df$Quarter), border = grey(0.5, alpha=0.5))
-  plot(area, border = grey(0.7, alpha=0.5), add = TRUE)
+  plot(df$statrec[[1]], main = paste0(df$species, " ", df$Survey, " Q", df$Quarter), border = grey(0.5, alpha=0.5))
+  #plot(area, border = grey(0.7, alpha=0.5), add = TRUE)
   pdat <- df %>% unnest(data) %>% unnest(cg, cg_ci)
   lines(pdat$y, pdat$x)
   years <- pdat$Year - min(pdat$Year) + 1
@@ -53,161 +53,161 @@ plot.report <- function(df) {
 
 ## Spurdog
 
-```{r Spurdog_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
+```{r Spurdog_plot, dpi=600, fig.width=7, fig.height=6, echo=FALSE}
 load(paste0('output/Spurdog_centre_gravity.rData'))
 
 # plot
-sapply(1:nrow(data), function(i) plot.report(data[i,]))
+tmp <- sapply(1:nrow(data), function(i) plot.report(data[i,]))
 ```
 
 
 ## Herring
 
-```{r Herring_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
+```{r Herring_plot, dpi=600, fig.width=7, fig.height=6, echo=FALSE}
 load(paste0('output/Herring_centre_gravity.rData'))
 
 # plot
-sapply(1:nrow(data), function(i) plot.report(data[i,]))
+tmp <- sapply(1:nrow(data), function(i) plot.report(data[i,]))
 ```
 
 
 ## Sprat
 
-```{r Sprat_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
+```{r Sprat_plot, dpi=600, fig.width=7, fig.height=6, echo=FALSE}
 load(paste0('output/Sprat_centre_gravity.rData'))
 
 # plot
-sapply(1:nrow(data), function(i) plot.report(data[i,]))
+tmp <- sapply(1:nrow(data), function(i) plot.report(data[i,]))
 ```
 
 
 ## Anchovy
 
-```{r Anchovy_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
+```{r Anchovy_plot, dpi=600, fig.width=7, fig.height=6, echo=FALSE}
 load(paste0('output/Anchovy_centre_gravity.rData'))
 
 # plot
-sapply(1:nrow(data), function(i) plot.report(data[i,]))
+tmp <- sapply(1:nrow(data), function(i) plot.report(data[i,]))
 ```
 
 
 ## Cod
 
-```{r Cod_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
+```{r Cod_plot, dpi=600, fig.width=7, fig.height=6, echo=FALSE}
 load(paste0('output/Cod_centre_gravity.rData'))
 
 # plot
-sapply(1:nrow(data), function(i) plot.report(data[i,]))
+tmp <- sapply(1:nrow(data), function(i) plot.report(data[i,]))
 ```
 
 
 ## Haddock
 
-```{r Haddock_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
+```{r Haddock_plot, dpi=600, fig.width=7, fig.height=6, echo=FALSE}
 load(paste0('output/Haddock_centre_gravity.rData'))
 
 # plot
-sapply(1:nrow(data), function(i) plot.report(data[i,]))
+tmp <- sapply(1:nrow(data), function(i) plot.report(data[i,]))
 ```
 
 
 ## Whiting
 
-```{r Whiting_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
+```{r Whiting_plot, dpi=600, fig.width=7, fig.height=6, echo=FALSE}
 load(paste0('output/Whiting_centre_gravity.rData'))
 
 # plot
-sapply(1:nrow(data), function(i) plot.report(data[i,]))
+tmp <- sapply(1:nrow(data), function(i) plot.report(data[i,]))
 ```
 
 
 ## Blue Whiting
 
-```{r Blue Whiting_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
+```{r Blue Whiting_plot, dpi=600, fig.width=7, fig.height=6, echo=FALSE}
 load(paste0('output/Blue Whiting_centre_gravity.rData'))
 
 # plot
-sapply(1:nrow(data), function(i) plot.report(data[i,]))
+tmp <- sapply(1:nrow(data), function(i) plot.report(data[i,]))
 ```
 
 
 ## Pollack
 
-```{r Pollack_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
+```{r Pollack_plot, dpi=600, fig.width=7, fig.height=6, echo=FALSE}
 load(paste0('output/Pollack_centre_gravity.rData'))
 
 # plot
-sapply(1:nrow(data), function(i) plot.report(data[i,]))
+tmp <- sapply(1:nrow(data), function(i) plot.report(data[i,]))
 ```
 
 
 ## Saithe
 
-```{r Saithe_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
+```{r Saithe_plot, dpi=600, fig.width=7, fig.height=6, echo=FALSE}
 load(paste0('output/Saithe_centre_gravity.rData'))
 
 # plot
-sapply(1:nrow(data), function(i) plot.report(data[i,]))
+tmp <- sapply(1:nrow(data), function(i) plot.report(data[i,]))
 ```
 
 
 ## Hake
 
-```{r Hake_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
+```{r Hake_plot, dpi=600, fig.width=7, fig.height=6, echo=FALSE}
 load(paste0('output/Hake_centre_gravity.rData'))
 
 # plot
-sapply(1:nrow(data), function(i) plot.report(data[i,]))
+tmp <- sapply(1:nrow(data), function(i) plot.report(data[i,]))
 ```
 
 
 ## Horse Mackerel
 
-```{r Horse Mackerel_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
+```{r Horse Mackerel_plot, dpi=600, fig.width=7, fig.height=6, echo=FALSE}
 load(paste0('output/Horse Mackerel_centre_gravity.rData'))
 
 # plot
-sapply(1:nrow(data), function(i) plot.report(data[i,]))
+tmp <- sapply(1:nrow(data), function(i) plot.report(data[i,]))
 ```
 
 
 ## Mackerel
 
-```{r Mackerel_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
+```{r Mackerel_plot, dpi=600, fig.width=7, fig.height=6, echo=FALSE}
 load(paste0('output/Mackerel_centre_gravity.rData'))
 
 # plot
-sapply(1:nrow(data), function(i) plot.report(data[i,]))
+tmp <- sapply(1:nrow(data), function(i) plot.report(data[i,]))
 ```
 
 
 ## Megrim
 
-```{r Megrim_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
+```{r Megrim_plot, dpi=600, fig.width=7, fig.height=6, echo=FALSE}
 load(paste0('output/Megrim_centre_gravity.rData'))
 
 # plot
-sapply(1:nrow(data), function(i) plot.report(data[i,]))
+tmp <- sapply(1:nrow(data), function(i) plot.report(data[i,]))
 ```
 
 
 ## Plaice
 
-```{r Plaice_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
+```{r Plaice_plot, dpi=600, fig.width=7, fig.height=6, echo=FALSE}
 load(paste0('output/Plaice_centre_gravity.rData'))
 
 # plot
-sapply(1:nrow(data), function(i) plot.report(data[i,]))
+tmp <- sapply(1:nrow(data), function(i) plot.report(data[i,]))
 ```
 
 
 ## Sole
 
-```{r Sole_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
+```{r Sole_plot, dpi=600, fig.width=7, fig.height=6, echo=FALSE}
 load(paste0('output/Sole_centre_gravity.rData'))
 
 # plot
-sapply(1:nrow(data), function(i) plot.report(data[i,]))
+tmp <- sapply(1:nrow(data), function(i) plot.report(data[i,]))
 ```
 
 
