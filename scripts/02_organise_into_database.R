@@ -37,6 +37,11 @@ hh$haulID <- makehaulID(hh)
 hh <- hh[c("Survey", "Quarter", "haulID",
            "Year", "Month", "Day", "ShootLat", "ShootLong", "HaulDur", "StatRec")]
 
+
+# fix bad statrecs
+filt <- which(!substring(hh$StatRec, nchar(hh$StatRec)-1, nchar(hh$StatRec)-1) %in% LETTERS)
+hh$StatRec[filt] <- paste0(substring(hh$StatRec[filt], 1, 2), "E", nchar(substring(hh$StatRec[filt], 3)))
+
 # write out comined HH file
 dbWriteTable(con, "hh", hh)
 
