@@ -50,8 +50,8 @@ dev.off()
 
 for (i in seq_along(species)) {
   cat("Working on species:", species[i], " (", i ,"/", length(species), ")\n"); flush.console()
-
-  sdata <- data %>% filter(species == species[i])
+  sp <- species[i]
+  sdata <- data %>% filter(species == sp)
 
   pdf(paste0("figures/", species[i], "_survey_data.pdf"), onefile = TRUE, paper = "a4")
     for (j in 1:nrow(sdata)) {
