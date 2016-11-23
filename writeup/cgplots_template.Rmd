@@ -22,8 +22,8 @@ plot.report <- function(df) {
 
   layout(matrix(c(1,1,2,3), 2, 2, byrow = TRUE), heights = c(1.5,1))
 
-  plot(df$statrec[[1]], main = paste0(df$Survey, " Q", df$Quarter), border = grey(0.5, alpha=0.5))
-  plot(area, border = grey(0.7, alpha=0.5), add = TRUE)
+  plot(df$statrec[[1]], main = paste0(df$species, " ", df$Survey, " Q", df$Quarter), border = grey(0.5, alpha=0.5))
+  #plot(area, border = grey(0.7, alpha=0.5), add = TRUE)
   pdat <- df %>% unnest(data) %>% unnest(cg, cg_ci)
   lines(pdat$y, pdat$x)
   years <- pdat$Year - min(pdat$Year) + 1
