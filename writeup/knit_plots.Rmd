@@ -24,10 +24,10 @@ plot_result <- function(res, main = "") {
   xy["3.d",] <- c(16.26910, 54.85013)
 
   # get coords of arrows and lines
-  x0 = xy[ifelse(res$slope > 0, res$Division1, res$Division2),1]
-  y0 = xy[ifelse(res$slope > 0, res$Division1, res$Division2),2]
-  x1 = xy[ifelse(res$slope > 0, res$Division2, res$Division1),1]
-  y1 = xy[ifelse(res$slope > 0, res$Division2, res$Division1),2]
+  x0 = xy[ifelse(res$slope < 0, res$Division1, res$Division2),1]
+  y0 = xy[ifelse(res$slope < 0, res$Division1, res$Division2),2]
+  x1 = xy[ifelse(res$slope < 0, res$Division2, res$Division1),1]
+  y1 = xy[ifelse(res$slope < 0, res$Division2, res$Division1),2]
 
   plot(area, border = grey(0.5, alpha = 0.5), main = main)
   segments(x0, y0, x1, y1,
