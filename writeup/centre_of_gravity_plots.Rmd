@@ -54,7 +54,7 @@ plot.report <- function(df) {
 ## Spurdog
 
 ```{r Spurdog_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
-load(paste0('output/', selected.species, '_centre_gravity.rData'))
+load(paste0('output/Spurdog_centre_gravity.rData'))
 
 # plot
 sapply(1:nrow(data), function(i) plot.report(data[i,]))
@@ -64,7 +64,7 @@ sapply(1:nrow(data), function(i) plot.report(data[i,]))
 ## Herring
 
 ```{r Herring_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
-load(paste0('output/', selected.species, '_centre_gravity.rData'))
+load(paste0('output/Herring_centre_gravity.rData'))
 
 # plot
 sapply(1:nrow(data), function(i) plot.report(data[i,]))
@@ -74,7 +74,7 @@ sapply(1:nrow(data), function(i) plot.report(data[i,]))
 ## Sprat
 
 ```{r Sprat_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
-load(paste0('output/', selected.species, '_centre_gravity.rData'))
+load(paste0('output/Sprat_centre_gravity.rData'))
 
 # plot
 sapply(1:nrow(data), function(i) plot.report(data[i,]))
@@ -84,7 +84,7 @@ sapply(1:nrow(data), function(i) plot.report(data[i,]))
 ## Anchovy
 
 ```{r Anchovy_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
-load(paste0('output/', selected.species, '_centre_gravity.rData'))
+load(paste0('output/Anchovy_centre_gravity.rData'))
 
 # plot
 sapply(1:nrow(data), function(i) plot.report(data[i,]))
@@ -94,7 +94,7 @@ sapply(1:nrow(data), function(i) plot.report(data[i,]))
 ## Cod
 
 ```{r Cod_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
-load(paste0('output/', selected.species, '_centre_gravity.rData'))
+load(paste0('output/Cod_centre_gravity.rData'))
 
 # plot
 sapply(1:nrow(data), function(i) plot.report(data[i,]))
@@ -104,7 +104,7 @@ sapply(1:nrow(data), function(i) plot.report(data[i,]))
 ## Haddock
 
 ```{r Haddock_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
-load(paste0('output/', selected.species, '_centre_gravity.rData'))
+load(paste0('output/Haddock_centre_gravity.rData'))
 
 # plot
 sapply(1:nrow(data), function(i) plot.report(data[i,]))
@@ -114,7 +114,7 @@ sapply(1:nrow(data), function(i) plot.report(data[i,]))
 ## Whiting
 
 ```{r Whiting_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
-load(paste0('output/', selected.species, '_centre_gravity.rData'))
+load(paste0('output/Whiting_centre_gravity.rData'))
 
 # plot
 sapply(1:nrow(data), function(i) plot.report(data[i,]))
@@ -124,7 +124,7 @@ sapply(1:nrow(data), function(i) plot.report(data[i,]))
 ## Blue Whiting
 
 ```{r Blue Whiting_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
-load(paste0('output/', selected.species, '_centre_gravity.rData'))
+load(paste0('output/Blue Whiting_centre_gravity.rData'))
 
 # plot
 sapply(1:nrow(data), function(i) plot.report(data[i,]))
@@ -134,7 +134,7 @@ sapply(1:nrow(data), function(i) plot.report(data[i,]))
 ## Pollack
 
 ```{r Pollack_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
-load(paste0('output/', selected.species, '_centre_gravity.rData'))
+load(paste0('output/Pollack_centre_gravity.rData'))
 
 # plot
 sapply(1:nrow(data), function(i) plot.report(data[i,]))
@@ -144,7 +144,7 @@ sapply(1:nrow(data), function(i) plot.report(data[i,]))
 ## Saithe
 
 ```{r Saithe_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
-load(paste0('output/', selected.species, '_centre_gravity.rData'))
+load(paste0('output/Saithe_centre_gravity.rData'))
 
 # plot
 sapply(1:nrow(data), function(i) plot.report(data[i,]))
@@ -154,7 +154,7 @@ sapply(1:nrow(data), function(i) plot.report(data[i,]))
 ## Hake
 
 ```{r Hake_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
-load(paste0('output/', selected.species, '_centre_gravity.rData'))
+load(paste0('output/Hake_centre_gravity.rData'))
 
 # plot
 sapply(1:nrow(data), function(i) plot.report(data[i,]))
@@ -164,7 +164,7 @@ sapply(1:nrow(data), function(i) plot.report(data[i,]))
 ## Horse Mackerel
 
 ```{r Horse Mackerel_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
-load(paste0('output/', selected.species, '_centre_gravity.rData'))
+load(paste0('output/Horse Mackerel_centre_gravity.rData'))
 
 # plot
 sapply(1:nrow(data), function(i) plot.report(data[i,]))
@@ -174,7 +174,7 @@ sapply(1:nrow(data), function(i) plot.report(data[i,]))
 ## Mackerel
 
 ```{r Mackerel_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
-load(paste0('output/', selected.species, '_centre_gravity.rData'))
+load(paste0('output/Mackerel_centre_gravity.rData'))
 
 # plot
 sapply(1:nrow(data), function(i) plot.report(data[i,]))
@@ -184,7 +184,7 @@ sapply(1:nrow(data), function(i) plot.report(data[i,]))
 ## Megrim
 
 ```{r Megrim_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
-load(paste0('output/', selected.species, '_centre_gravity.rData'))
+load(paste0('output/Megrim_centre_gravity.rData'))
 
 # plot
 sapply(1:nrow(data), function(i) plot.report(data[i,]))
@@ -194,7 +194,7 @@ sapply(1:nrow(data), function(i) plot.report(data[i,]))
 ## Plaice
 
 ```{r Plaice_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
-load(paste0('output/', selected.species, '_centre_gravity.rData'))
+load(paste0('output/Plaice_centre_gravity.rData'))
 
 # plot
 sapply(1:nrow(data), function(i) plot.report(data[i,]))
@@ -204,7 +204,7 @@ sapply(1:nrow(data), function(i) plot.report(data[i,]))
 ## Sole
 
 ```{r Sole_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
-load(paste0('output/', selected.species, '_centre_gravity.rData'))
+load(paste0('output/Sole_centre_gravity.rData'))
 
 # plot
 sapply(1:nrow(data), function(i) plot.report(data[i,]))

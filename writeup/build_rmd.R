@@ -23,7 +23,7 @@ cgspecies_plots <- function(sp) {
 "## %s
 
 ```{r %s_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
-load(paste0('output/', selected.species, '_centre_gravity.rData'))
+load(paste0('output/%s_centre_gravity.rData'))
 
 # plot
 sapply(1:nrow(data), function(i) plot.report(data[i,]))
