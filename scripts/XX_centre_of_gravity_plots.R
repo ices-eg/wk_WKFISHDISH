@@ -14,12 +14,12 @@ if (!dir.exists("figures")) dir.create("figures")
 
 plot.report <- function(df) {
 
-  if (nrow(df$data[[1]]) < 3) return(NULL)
+  if (nrow(df$data[[1]]) == 0) return(NULL)
 
   layout(matrix(c(1,1,2,3), 2, 2, byrow = TRUE), heights = c(1.5,1))
 
-  plot(df$statrec[[1]], main = paste0(df$Survey, " Q", df$Quarter), border = grey(0.5, alpha=0.5))
-  plot(area, border = grey(0.7, alpha=0.5), add = TRUE)
+  plot(df$statrec[[1]], main = paste0(df$species, " ",df$Survey, " Q", df$Quarter), border = grey(0.5, alpha=0.5))
+  #plot(area, border = grey(0.7, alpha=0.5), add = TRUE)
   pdat <- df %>% unnest(data) %>% unnest(cg, cg_ci)
   lines(pdat$y, pdat$x)
   years <- pdat$Year - min(pdat$Year) + 1
@@ -44,13 +44,14 @@ plot.report <- function(df) {
 }
 
 
+selected.species <- "Norway Pout"
 for (selected.species in unique(getControlTable()$Species)) {
 
   load(paste0("output/", selected.species, "_centre_gravity.rData"))
 
   # plot
   pdf(paste0("figures/", selected.species, "_centre_gravity.pdf"), onefile = TRUE, paper = "a4")
-  sapply(1:nrow(data), function(i) plot.report(data[i,]))
+  tmp <- sapply(1:nrow(data), function(i) plot.report(data[i,]))
   dev.off()
 
 }

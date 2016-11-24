@@ -9,7 +9,6 @@ source("scripts/header.R")
 if (!dir.exists("output")) dir.create("output")
 force_resim <- FALSE
 
-
 # read in spatial datasets
 load("input/spatial_model_data.rData")
 

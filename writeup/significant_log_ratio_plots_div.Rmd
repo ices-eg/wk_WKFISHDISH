@@ -18,7 +18,7 @@ load("input/spatial_model_data.rData")
 ## Megrim
 
 ```{r Megrim, dpi=300, fig.width=8, fig.height=7, echo=FALSE, message=FALSE}
-load('output/Megrim_trends.rData')
+load('output/Megrim_trends_div.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 
@@ -40,7 +40,7 @@ print(p)
 ## Plaice
 
 ```{r Plaice, dpi=300, fig.width=8, fig.height=7, echo=FALSE, message=FALSE}
-load('output/Plaice_trends.rData')
+load('output/Plaice_trends_div.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 
@@ -62,7 +62,7 @@ print(p)
 ## Sole
 
 ```{r Sole, dpi=300, fig.width=8, fig.height=7, echo=FALSE, message=FALSE}
-load('output/Sole_trends.rData')
+load('output/Sole_trends_div.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 
@@ -84,7 +84,7 @@ print(p)
 ## Anchovy
 
 ```{r Anchovy, dpi=300, fig.width=8, fig.height=7, echo=FALSE, message=FALSE}
-load('output/Anchovy_trends.rData')
+load('output/Anchovy_trends_div.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 
@@ -106,7 +106,7 @@ print(p)
 ## Black-bellied anglerfish
 
 ```{r Black-bellied anglerfish, dpi=300, fig.width=8, fig.height=7, echo=FALSE, message=FALSE}
-load('output/Black-bellied anglerfish_trends.rData')
+load('output/Black-bellied anglerfish_trends_div.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 
@@ -128,7 +128,7 @@ print(p)
 ## White anglerfish
 
 ```{r White anglerfish, dpi=300, fig.width=8, fig.height=7, echo=FALSE, message=FALSE}
-load('output/White anglerfish_trends.rData')
+load('output/White anglerfish_trends_div.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 
@@ -150,7 +150,7 @@ print(p)
 ## Blue Whiting
 
 ```{r Blue Whiting, dpi=300, fig.width=8, fig.height=7, echo=FALSE, message=FALSE}
-load('output/Blue Whiting_trends.rData')
+load('output/Blue Whiting_trends_div.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 
@@ -172,7 +172,7 @@ print(p)
 ## Cod
 
 ```{r Cod, dpi=300, fig.width=8, fig.height=7, echo=FALSE, message=FALSE}
-load('output/Cod_trends.rData')
+load('output/Cod_trends_div.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 
@@ -194,7 +194,7 @@ print(p)
 ## Haddock
 
 ```{r Haddock, dpi=300, fig.width=8, fig.height=7, echo=FALSE, message=FALSE}
-load('output/Haddock_trends.rData')
+load('output/Haddock_trends_div.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 
@@ -216,7 +216,7 @@ print(p)
 ## Hake
 
 ```{r Hake, dpi=300, fig.width=8, fig.height=7, echo=FALSE, message=FALSE}
-load('output/Hake_trends.rData')
+load('output/Hake_trends_div.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 
@@ -238,7 +238,7 @@ print(p)
 ## Herring
 
 ```{r Herring, dpi=300, fig.width=8, fig.height=7, echo=FALSE, message=FALSE}
-load('output/Herring_trends.rData')
+load('output/Herring_trends_div.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 
@@ -260,7 +260,7 @@ print(p)
 ## Horse Mackerel
 
 ```{r Horse Mackerel, dpi=300, fig.width=8, fig.height=7, echo=FALSE, message=FALSE}
-load('output/Horse Mackerel_trends.rData')
+load('output/Horse Mackerel_trends_div.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 
@@ -282,7 +282,7 @@ print(p)
 ## Mackerel
 
 ```{r Mackerel, dpi=300, fig.width=8, fig.height=7, echo=FALSE, message=FALSE}
-load('output/Mackerel_trends.rData')
+load('output/Mackerel_trends_div.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 
@@ -304,7 +304,7 @@ print(p)
 ## Norway Pout
 
 ```{r Norway Pout, dpi=300, fig.width=8, fig.height=7, echo=FALSE, message=FALSE}
-load('output/Norway Pout_trends.rData')
+load('output/Norway Pout_trends_div.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 
@@ -326,7 +326,7 @@ print(p)
 ## Pollack
 
 ```{r Pollack, dpi=300, fig.width=8, fig.height=7, echo=FALSE, message=FALSE}
-load('output/Pollack_trends.rData')
+load('output/Pollack_trends_div.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 
@@ -348,7 +348,7 @@ print(p)
 ## Saithe
 
 ```{r Saithe, dpi=300, fig.width=8, fig.height=7, echo=FALSE, message=FALSE}
-load('output/Saithe_trends.rData')
+load('output/Saithe_trends_div.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 
@@ -370,7 +370,7 @@ print(p)
 ## Spurdog
 
 ```{r Spurdog, dpi=300, fig.width=8, fig.height=7, echo=FALSE, message=FALSE}
-load('output/Spurdog_trends.rData')
+load('output/Spurdog_trends_div.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 
@@ -392,7 +392,7 @@ print(p)
 ## Sprat
 
 ```{r Sprat, dpi=300, fig.width=8, fig.height=7, echo=FALSE, message=FALSE}
-load('output/Sprat_trends.rData')
+load('output/Sprat_trends_div.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 
@@ -414,7 +414,7 @@ print(p)
 ## Whiting
 
 ```{r Whiting, dpi=300, fig.width=8, fig.height=7, echo=FALSE, message=FALSE}
-load('output/Whiting_trends.rData')
+load('output/Whiting_trends_div.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 

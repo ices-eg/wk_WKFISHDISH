@@ -18,11 +18,11 @@ load("input/spatial_model_data.rData")
 ## Megrim
 
 ```{r Megrim, results='asis', echo=FALSE}
-load('output/Megrim_trends.rData')
+load('output/Megrim_trends_tac.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 if (nrow(res)>0) {
-  knitr::kable(res, digits = 3)
+knitr::kable(res, digits = 3)
 }
 ```
 
@@ -30,11 +30,11 @@ if (nrow(res)>0) {
 ## Plaice
 
 ```{r Plaice, results='asis', echo=FALSE}
-load('output/Plaice_trends.rData')
+load('output/Plaice_trends_tac.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 if (nrow(res)>0) {
-  knitr::kable(res, digits = 3)
+knitr::kable(res, digits = 3)
 }
 ```
 
@@ -42,11 +42,11 @@ if (nrow(res)>0) {
 ## Sole
 
 ```{r Sole, results='asis', echo=FALSE}
-load('output/Sole_trends.rData')
+load('output/Sole_trends_tac.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 if (nrow(res)>0) {
-  knitr::kable(res, digits = 3)
+knitr::kable(res, digits = 3)
 }
 ```
 
@@ -54,11 +54,11 @@ if (nrow(res)>0) {
 ## Anchovy
 
 ```{r Anchovy, results='asis', echo=FALSE}
-load('output/Anchovy_trends.rData')
+load('output/Anchovy_trends_tac.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 if (nrow(res)>0) {
-  knitr::kable(res, digits = 3)
+knitr::kable(res, digits = 3)
 }
 ```
 
@@ -66,11 +66,11 @@ if (nrow(res)>0) {
 ## Black-bellied anglerfish
 
 ```{r Black-bellied anglerfish, results='asis', echo=FALSE}
-load('output/Black-bellied anglerfish_trends.rData')
+load('output/Black-bellied anglerfish_trends_tac.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 if (nrow(res)>0) {
-  knitr::kable(res, digits = 3)
+knitr::kable(res, digits = 3)
 }
 ```
 
@@ -78,11 +78,11 @@ if (nrow(res)>0) {
 ## White anglerfish
 
 ```{r White anglerfish, results='asis', echo=FALSE}
-load('output/White anglerfish_trends.rData')
+load('output/White anglerfish_trends_tac.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 if (nrow(res)>0) {
-  knitr::kable(res, digits = 3)
+knitr::kable(res, digits = 3)
 }
 ```
 
@@ -90,11 +90,11 @@ if (nrow(res)>0) {
 ## Blue Whiting
 
 ```{r Blue Whiting, results='asis', echo=FALSE}
-load('output/Blue Whiting_trends.rData')
+load('output/Blue Whiting_trends_tac.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 if (nrow(res)>0) {
-  knitr::kable(res, digits = 3)
+knitr::kable(res, digits = 3)
 }
 ```
 
@@ -102,11 +102,11 @@ if (nrow(res)>0) {
 ## Cod
 
 ```{r Cod, results='asis', echo=FALSE}
-load('output/Cod_trends.rData')
+load('output/Cod_trends_tac.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 if (nrow(res)>0) {
-  knitr::kable(res, digits = 3)
+knitr::kable(res, digits = 3)
 }
 ```
 
@@ -114,11 +114,11 @@ if (nrow(res)>0) {
 ## Haddock
 
 ```{r Haddock, results='asis', echo=FALSE}
-load('output/Haddock_trends.rData')
+load('output/Haddock_trends_tac.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 if (nrow(res)>0) {
-  knitr::kable(res, digits = 3)
+knitr::kable(res, digits = 3)
 }
 ```
 
@@ -126,11 +126,11 @@ if (nrow(res)>0) {
 ## Hake
 
 ```{r Hake, results='asis', echo=FALSE}
-load('output/Hake_trends.rData')
+load('output/Hake_trends_tac.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 if (nrow(res)>0) {
-  knitr::kable(res, digits = 3)
+knitr::kable(res, digits = 3)
 }
 ```
 
@@ -138,11 +138,11 @@ if (nrow(res)>0) {
 ## Herring
 
 ```{r Herring, results='asis', echo=FALSE}
-load('output/Herring_trends.rData')
+load('output/Herring_trends_tac.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 if (nrow(res)>0) {
-  knitr::kable(res, digits = 3)
+knitr::kable(res, digits = 3)
 }
 ```
 
@@ -150,11 +150,11 @@ if (nrow(res)>0) {
 ## Horse Mackerel
 
 ```{r Horse Mackerel, results='asis', echo=FALSE}
-load('output/Horse Mackerel_trends.rData')
+load('output/Horse Mackerel_trends_tac.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 if (nrow(res)>0) {
-  knitr::kable(res, digits = 3)
+knitr::kable(res, digits = 3)
 }
 ```
 
@@ -162,11 +162,11 @@ if (nrow(res)>0) {
 ## Mackerel
 
 ```{r Mackerel, results='asis', echo=FALSE}
-load('output/Mackerel_trends.rData')
+load('output/Mackerel_trends_tac.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 if (nrow(res)>0) {
-  knitr::kable(res, digits = 3)
+knitr::kable(res, digits = 3)
 }
 ```
 
@@ -174,11 +174,11 @@ if (nrow(res)>0) {
 ## Norway Pout
 
 ```{r Norway Pout, results='asis', echo=FALSE}
-load('output/Norway Pout_trends.rData')
+load('output/Norway Pout_trends_tac.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 if (nrow(res)>0) {
-  knitr::kable(res, digits = 3)
+knitr::kable(res, digits = 3)
 }
 ```
 
@@ -186,11 +186,11 @@ if (nrow(res)>0) {
 ## Pollack
 
 ```{r Pollack, results='asis', echo=FALSE}
-load('output/Pollack_trends.rData')
+load('output/Pollack_trends_tac.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 if (nrow(res)>0) {
-  knitr::kable(res, digits = 3)
+knitr::kable(res, digits = 3)
 }
 ```
 
@@ -198,11 +198,11 @@ if (nrow(res)>0) {
 ## Saithe
 
 ```{r Saithe, results='asis', echo=FALSE}
-load('output/Saithe_trends.rData')
+load('output/Saithe_trends_tac.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 if (nrow(res)>0) {
-  knitr::kable(res, digits = 3)
+knitr::kable(res, digits = 3)
 }
 ```
 
@@ -210,11 +210,11 @@ if (nrow(res)>0) {
 ## Spurdog
 
 ```{r Spurdog, results='asis', echo=FALSE}
-load('output/Spurdog_trends.rData')
+load('output/Spurdog_trends_tac.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 if (nrow(res)>0) {
-  knitr::kable(res, digits = 3)
+knitr::kable(res, digits = 3)
 }
 ```
 
@@ -222,11 +222,11 @@ if (nrow(res)>0) {
 ## Sprat
 
 ```{r Sprat, results='asis', echo=FALSE}
-load('output/Sprat_trends.rData')
+load('output/Sprat_trends_tac.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 if (nrow(res)>0) {
-  knitr::kable(res, digits = 3)
+knitr::kable(res, digits = 3)
 }
 ```
 
@@ -234,11 +234,11 @@ if (nrow(res)>0) {
 ## Whiting
 
 ```{r Whiting, results='asis', echo=FALSE}
-load('output/Whiting_trends.rData')
+load('output/Whiting_trends_tac.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 if (nrow(res)>0) {
-  knitr::kable(res, digits = 3)
+knitr::kable(res, digits = 3)
 }
 ```
 

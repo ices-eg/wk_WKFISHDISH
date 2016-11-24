@@ -16,18 +16,15 @@ load("input/spatial_model_data.rData")
 
 ```{r functions, include=FALSE}
 # plot result
-plot_result <- function(res, main = "") {
+plot_result <- function(res, area, main = "") {
 
   xy <- coordinates(area)
-  # relocate center of 3.d for plotting
-  #xy["3.d",] <- unlist(locator(n=1))
-  xy["3.d",] <- c(16.26910, 54.85013)
 
   # get coords of arrows and lines
-  x0 = xy[ifelse(res$slope < 0, res$Division1, res$Division2),1]
-  y0 = xy[ifelse(res$slope < 0, res$Division1, res$Division2),2]
-  x1 = xy[ifelse(res$slope < 0, res$Division2, res$Division1),1]
-  y1 = xy[ifelse(res$slope < 0, res$Division2, res$Division1),2]
+  x0 = xy[ifelse(res$slope < 0, res$TAC1, res$TAC2),1]
+  y0 = xy[ifelse(res$slope < 0, res$TAC1, res$TAC2),2]
+  x1 = xy[ifelse(res$slope < 0, res$TAC2, res$TAC1),1]
+  y1 = xy[ifelse(res$slope < 0, res$TAC2, res$TAC1),2]
 
   plot(area, border = grey(0.5, alpha = 0.5), main = main)
   segments(x0, y0, x1, y1,
@@ -41,226 +38,215 @@ plot_result <- function(res, main = "") {
 }
 ```
 
-## TAC units
-
-![](../figures/TAC_units_cropped.png)
-
-Figure 1. A figure showing the size and location of the TAC units under consideration.  Each unit is uniquely coloured to distinguish it and the name of each unit is shown in its centre.
-
-## Data coverage
-
-![](../figures/spatial_smoother_structure.png)
-
-Figure 2. Overlayed on the TAC units is the spatial extent considered for the assessment of changes in distribution between stock areas.  For example, Division 8.d is represented by 3 statistical rectangles traversing the shelf edge, and 7.k is represented by 9 statistical rectangles in the north eastern corner covering approximately 25\% of the area defined by 7.k. Other regions are more completley covered, such as, 4.a and 4.b.
 
 
 
 ## Megrim
 
 ```{r Megrim_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
-load('output/Megrim_trends.rData')
+load('output/Megrim_trends_tac.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 if (nrow(res)>0) {
-  plot_result(res, main = 'Megrim')
+plot_result(res, main = 'Megrim')
 }
 ```
 
 ## Plaice
 
 ```{r Plaice_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
-load('output/Plaice_trends.rData')
+load('output/Plaice_trends_tac.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 if (nrow(res)>0) {
-  plot_result(res, main = 'Plaice')
+plot_result(res, main = 'Plaice')
 }
 ```
 
 ## Sole
 
 ```{r Sole_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
-load('output/Sole_trends.rData')
+load('output/Sole_trends_tac.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 if (nrow(res)>0) {
-  plot_result(res, main = 'Sole')
+plot_result(res, main = 'Sole')
 }
 ```
 
 ## Anchovy
 
 ```{r Anchovy_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
-load('output/Anchovy_trends.rData')
+load('output/Anchovy_trends_tac.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 if (nrow(res)>0) {
-  plot_result(res, main = 'Anchovy')
+plot_result(res, main = 'Anchovy')
 }
 ```
 
 ## Black-bellied anglerfish
 
 ```{r Black-bellied anglerfish_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
-load('output/Black-bellied anglerfish_trends.rData')
+load('output/Black-bellied anglerfish_trends_tac.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 if (nrow(res)>0) {
-  plot_result(res, main = 'Black-bellied anglerfish')
+plot_result(res, main = 'Black-bellied anglerfish')
 }
 ```
 
 ## White anglerfish
 
 ```{r White anglerfish_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
-load('output/White anglerfish_trends.rData')
+load('output/White anglerfish_trends_tac.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 if (nrow(res)>0) {
-  plot_result(res, main = 'White anglerfish')
+plot_result(res, main = 'White anglerfish')
 }
 ```
 
 ## Blue Whiting
 
 ```{r Blue Whiting_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
-load('output/Blue Whiting_trends.rData')
+load('output/Blue Whiting_trends_tac.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 if (nrow(res)>0) {
-  plot_result(res, main = 'Blue Whiting')
+plot_result(res, main = 'Blue Whiting')
 }
 ```
 
 ## Cod
 
 ```{r Cod_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
-load('output/Cod_trends.rData')
+load('output/Cod_trends_tac.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 if (nrow(res)>0) {
-  plot_result(res, main = 'Cod')
+plot_result(res, main = 'Cod')
 }
 ```
 
 ## Haddock
 
 ```{r Haddock_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
-load('output/Haddock_trends.rData')
+load('output/Haddock_trends_tac.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 if (nrow(res)>0) {
-  plot_result(res, main = 'Haddock')
+plot_result(res, main = 'Haddock')
 }
 ```
 
 ## Hake
 
 ```{r Hake_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
-load('output/Hake_trends.rData')
+load('output/Hake_trends_tac.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 if (nrow(res)>0) {
-  plot_result(res, main = 'Hake')
+plot_result(res, main = 'Hake')
 }
 ```
 
 ## Herring
 
 ```{r Herring_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
-load('output/Herring_trends.rData')
+load('output/Herring_trends_tac.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 if (nrow(res)>0) {
-  plot_result(res, main = 'Herring')
+plot_result(res, main = 'Herring')
 }
 ```
 
 ## Horse Mackerel
 
 ```{r Horse Mackerel_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
-load('output/Horse Mackerel_trends.rData')
+load('output/Horse Mackerel_trends_tac.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 if (nrow(res)>0) {
-  plot_result(res, main = 'Horse Mackerel')
+plot_result(res, main = 'Horse Mackerel')
 }
 ```
 
 ## Mackerel
 
 ```{r Mackerel_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
-load('output/Mackerel_trends.rData')
+load('output/Mackerel_trends_tac.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 if (nrow(res)>0) {
-  plot_result(res, main = 'Mackerel')
+plot_result(res, main = 'Mackerel')
 }
 ```
 
 ## Norway Pout
 
 ```{r Norway Pout_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
-load('output/Norway Pout_trends.rData')
+load('output/Norway Pout_trends_tac.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 if (nrow(res)>0) {
-  plot_result(res, main = 'Norway Pout')
+plot_result(res, main = 'Norway Pout')
 }
 ```
 
 ## Pollack
 
 ```{r Pollack_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
-load('output/Pollack_trends.rData')
+load('output/Pollack_trends_tac.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 if (nrow(res)>0) {
-  plot_result(res, main = 'Pollack')
+plot_result(res, main = 'Pollack')
 }
 ```
 
 ## Saithe
 
 ```{r Saithe_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
-load('output/Saithe_trends.rData')
+load('output/Saithe_trends_tac.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 if (nrow(res)>0) {
-  plot_result(res, main = 'Saithe')
+plot_result(res, main = 'Saithe')
 }
 ```
 
 ## Spurdog
 
 ```{r Spurdog_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
-load('output/Spurdog_trends.rData')
+load('output/Spurdog_trends_tac.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 if (nrow(res)>0) {
-  plot_result(res, main = 'Spurdog')
+plot_result(res, main = 'Spurdog')
 }
 ```
 
 ## Sprat
 
 ```{r Sprat_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
-load('output/Sprat_trends.rData')
+load('output/Sprat_trends_tac.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 if (nrow(res)>0) {
-  plot_result(res, main = 'Sprat')
+plot_result(res, main = 'Sprat')
 }
 ```
 
 ## Whiting
 
 ```{r Whiting_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
-load('output/Whiting_trends.rData')
+load('output/Whiting_trends_tac.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 if (nrow(res)>0) {
-  plot_result(res, main = 'Whiting')
+plot_result(res, main = 'Whiting')
 }
 ```
 

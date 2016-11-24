@@ -58,7 +58,7 @@ Figure 2. Overlayed on the TAC units is the spatial extent considered for the as
 ## Megrim
 
 ```{r Megrim_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
-load('output/Megrim_trends.rData')
+load('output/Megrim_trends_div.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 if (nrow(res)>0) {
@@ -69,7 +69,7 @@ if (nrow(res)>0) {
 ## Plaice
 
 ```{r Plaice_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
-load('output/Plaice_trends.rData')
+load('output/Plaice_trends_div.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 if (nrow(res)>0) {
@@ -80,7 +80,7 @@ if (nrow(res)>0) {
 ## Sole
 
 ```{r Sole_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
-load('output/Sole_trends.rData')
+load('output/Sole_trends_div.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 if (nrow(res)>0) {
@@ -91,7 +91,7 @@ if (nrow(res)>0) {
 ## Anchovy
 
 ```{r Anchovy_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
-load('output/Anchovy_trends.rData')
+load('output/Anchovy_trends_div.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 if (nrow(res)>0) {
@@ -102,7 +102,7 @@ if (nrow(res)>0) {
 ## Black-bellied anglerfish
 
 ```{r Black-bellied anglerfish_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
-load('output/Black-bellied anglerfish_trends.rData')
+load('output/Black-bellied anglerfish_trends_div.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 if (nrow(res)>0) {
@@ -113,7 +113,7 @@ if (nrow(res)>0) {
 ## White anglerfish
 
 ```{r White anglerfish_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
-load('output/White anglerfish_trends.rData')
+load('output/White anglerfish_trends_div.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 if (nrow(res)>0) {
@@ -124,7 +124,7 @@ if (nrow(res)>0) {
 ## Blue Whiting
 
 ```{r Blue Whiting_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
-load('output/Blue Whiting_trends.rData')
+load('output/Blue Whiting_trends_div.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 if (nrow(res)>0) {
@@ -135,7 +135,7 @@ if (nrow(res)>0) {
 ## Cod
 
 ```{r Cod_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
-load('output/Cod_trends.rData')
+load('output/Cod_trends_div.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 if (nrow(res)>0) {
@@ -146,7 +146,7 @@ if (nrow(res)>0) {
 ## Haddock
 
 ```{r Haddock_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
-load('output/Haddock_trends.rData')
+load('output/Haddock_trends_div.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 if (nrow(res)>0) {
@@ -157,7 +157,7 @@ if (nrow(res)>0) {
 ## Hake
 
 ```{r Hake_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
-load('output/Hake_trends.rData')
+load('output/Hake_trends_div.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 if (nrow(res)>0) {
@@ -168,7 +168,7 @@ if (nrow(res)>0) {
 ## Herring
 
 ```{r Herring_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
-load('output/Herring_trends.rData')
+load('output/Herring_trends_div.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 if (nrow(res)>0) {
@@ -179,7 +179,7 @@ if (nrow(res)>0) {
 ## Horse Mackerel
 
 ```{r Horse Mackerel_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
-load('output/Horse Mackerel_trends.rData')
+load('output/Horse Mackerel_trends_div.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 if (nrow(res)>0) {
@@ -190,7 +190,7 @@ if (nrow(res)>0) {
 ## Mackerel
 
 ```{r Mackerel_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
-load('output/Mackerel_trends.rData')
+load('output/Mackerel_trends_div.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 if (nrow(res)>0) {
@@ -201,7 +201,7 @@ if (nrow(res)>0) {
 ## Norway Pout
 
 ```{r Norway Pout_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
-load('output/Norway Pout_trends.rData')
+load('output/Norway Pout_trends_div.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 if (nrow(res)>0) {
@@ -212,7 +212,7 @@ if (nrow(res)>0) {
 ## Pollack
 
 ```{r Pollack_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
-load('output/Pollack_trends.rData')
+load('output/Pollack_trends_div.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 if (nrow(res)>0) {
@@ -223,7 +223,7 @@ if (nrow(res)>0) {
 ## Saithe
 
 ```{r Saithe_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
-load('output/Saithe_trends.rData')
+load('output/Saithe_trends_div.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 if (nrow(res)>0) {
@@ -234,7 +234,7 @@ if (nrow(res)>0) {
 ## Spurdog
 
 ```{r Spurdog_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
-load('output/Spurdog_trends.rData')
+load('output/Spurdog_trends_div.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 if (nrow(res)>0) {
@@ -245,7 +245,7 @@ if (nrow(res)>0) {
 ## Sprat
 
 ```{r Sprat_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
-load('output/Sprat_trends.rData')
+load('output/Sprat_trends_div.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 if (nrow(res)>0) {
@@ -256,7 +256,7 @@ if (nrow(res)>0) {
 ## Whiting
 
 ```{r Whiting_plot, dpi=600, fig.width=7, fig.height=7, echo=FALSE}
-load('output/Whiting_trends.rData')
+load('output/Whiting_trends_div.rData')
 res$p_adj <- p.adjust(res$median_p, method = 'BH')
 res %<>% filter(p_adj < 0.05) %>% select(-p)
 if (nrow(res)>0) {

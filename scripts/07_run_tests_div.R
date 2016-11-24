@@ -85,5 +85,5 @@ for (selected.species in unique(getControlTable()$Species)) {
 
   res %>% filter(p_adj < 0.05) %>% select(-p)
 
-  save(res, stocks, file = paste0("output/", selected.species, "_trends.rData"))
+  save(res, stocks, file = paste0("output/", selected.species, "_trends_div.rData"))
 }
