@@ -42,6 +42,10 @@ hh <- hh[c("Survey", "Quarter", "haulID",
 filt <- which(!substring(hh$StatRec, nchar(hh$StatRec)-1, nchar(hh$StatRec)-1) %in% LETTERS)
 hh$StatRec[filt] <- paste0(substring(hh$StatRec[filt], 1, 2), "E", nchar(substring(hh$StatRec[filt], 3)))
 
+# fix erroneous data
+hh$ShootLong[hh$haulID == "NS-IBTS:3:ENG:CIR:153:78:2001"] <- hh$ShootLong[hh$haulID == "NS-IBTS:3:ENG:CIR:153:78:2001"]/10
+hh$StatRec[hh$haulID == "NS-IBTS:3:ENG:CIR:153:78:2001"] <- "38F1"
+
 # write out comined HH file
 dbWriteTable(con, "hh", hh)
 
