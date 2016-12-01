@@ -256,9 +256,9 @@ sim_cpue <- function(mod, nsim = 1000) {
 
 # plot front plot
 front_plot <- function(sstatrec, survey, quarter) {
-  plot(area, xlim = bbox(sstatrec)["x",], ylim = bbox(sstatrec)["y",], col = gplots::rich.colors(nrow(area), alpha = 0.5))
-  plot(statrec, add = TRUE)
-  plot(sstatrec, add = TRUE, col = grey(0.5, alpha = 0.5))
+  plot(area, xlim = bbox(sstatrec)["x",], ylim = bbox(sstatrec)["y",], col = gplots::rich.colors(nrow(area), alpha = 0.2), border = grey(0.2, 0.5))
+  plot(statrec, add = TRUE, border = grey(0.5, 0.5))
+  plot(sstatrec, add = TRUE, col = grey(0.2, alpha = 0.5))
   mtext(paste0(survey, " Q", quarter), font = 2)
 }
 
